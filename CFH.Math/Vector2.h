@@ -5,13 +5,6 @@ namespace CFH {
 	struct Vector2
 	{
 	public:
-		float X; float Y;
-
-		Vector2();
-		Vector2(float value);
-		Vector2(float x, float y);
-		~Vector2();
-
 		static const Vector2 UnitX;
 		static const Vector2 UnitY;
 		static const Vector2 One;
@@ -20,6 +13,13 @@ namespace CFH {
 		static const Vector2 Down;
 		static const Vector2 Right;
 		static const Vector2 Left;
+
+		float X; float Y;
+
+		Vector2();
+		Vector2(float value);
+		Vector2(float x, float y);
+		~Vector2();
 
 		Vector2 operator+(Vector2 vector) const;
 		Vector2 operator-(Vector2 vector) const;

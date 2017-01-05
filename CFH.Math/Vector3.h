@@ -7,14 +7,6 @@ namespace CFH
 	class Vector3
 	{
 	public:
-		float X; float Y; float Z;
-
-		Vector3();
-		Vector3(float value);
-		Vector3(Vector2 vector, float z);
-		Vector3(float x, float y, float z);
-		~Vector3();
-
 		static const Vector3 UnitX;
 		static const Vector3 UnitY;
 		static const Vector3 UnitZ;
@@ -26,6 +18,14 @@ namespace CFH
 		static const Vector3 Down;
 		static const Vector3 Right;
 		static const Vector3 Left;
+
+		float X; float Y; float Z;
+
+		Vector3();
+		Vector3(float value);
+		Vector3(Vector2 vector, float z);
+		Vector3(float x, float y, float z);
+		~Vector3();
 
 		Vector3 operator+(Vector3 vector) const;
 		Vector3 operator-(Vector3 vector) const;
