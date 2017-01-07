@@ -66,6 +66,13 @@ namespace CFH
 		distance = tmin;
 		return true;
 	}
+	bool Ray::Intersects(BoundingBox boundingBox, Vector3& point) const
+	{
+		float distance;
+		bool result = Intersects(boundingBox, distance);
+		point = Position + (Direction * distance);
+		return result;
+	}
 	bool Ray::Intersects(BoundingFrustum boundingFrustum) const
 	{
 		float distance;
@@ -115,6 +122,13 @@ namespace CFH
 		}
 		return true;
 	}
+	bool Ray::Intersects(BoundingFrustum boundingFrustum, Vector3& point) const
+	{
+		float distance;
+		bool result = Intersects(boundingFrustum, distance);
+		point = Position + (Direction * distance);
+		return result;
+	}
 	bool Ray::Intersects(BoundingSphere boundingSphere) const
 	{
 		float distance;
@@ -151,6 +165,13 @@ namespace CFH
 		distance = 0;
 		return false;
 	}
+	bool Ray::Intersects(BoundingSphere boundingSphere, Vector3& point) const
+	{
+		float distance;
+		bool result = Intersects(boundingSphere, distance);
+		point = Position + (Direction * distance);
+		return result;
+	}
 	bool Ray::Intersects(Plane plane) const
 	{
 		float distance;
@@ -158,25 +179,31 @@ namespace CFH
 	}
 	bool Ray::Intersects(Plane plane, float& distance) const
 	{
-		float dot;
-		Vector3::Dot(Direction, plane.Normal, dot);
-		if (abs(dot) < 1e-5)
+		float denominator = Vector3::Dot(Direction, plane.Normal);
+		if (MathHelper::Abs(denominator) < 0.0001f)
 		{
+			//Ray is parallell with the plane.
 			distance = 0;
 			return false;
 		}
 
-		distance = (-plane.D - Vector3::Dot(plane.Normal, Position) / dot);
-
-		if (distance <  0)
+		distance = (-plane.D - Vector3::Dot(plane.Normal, Position)) / denominator;
+		
+		//Allow a small error margin
+		if (distance >= -0.0001f)
 		{
-			distance = 0;
-			if (distance < -1e-5)
-				return false;
-			else
-				return true;
+			if (distance < 0.0f)
+				distance = 0.0f;
+			return true;
 		}
 
 		return false;
+	}
+	bool Ray::Intersects(Plane plane, Vector3& point) const
+	{
+		float distance;
+		bool result = Intersects(plane, distance);
+		point = Position + (Direction * distance);
+		return result;
 	}
 }

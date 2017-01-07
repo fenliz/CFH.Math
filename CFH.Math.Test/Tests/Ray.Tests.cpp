@@ -1,5 +1,6 @@
 #include "..\HelperMethods.h"
 #include "Ray.h"
+#include "Plane.h"
 
 TEST(Ray, Constructors)
 {

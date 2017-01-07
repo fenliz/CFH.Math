@@ -137,6 +137,6 @@ namespace CFH
 	}
 	void MathHelper::Abs(float value, float& result)
 	{
-		result = (value < 0 ? -value : value);
+		result = fabs(value);
 	}
 }

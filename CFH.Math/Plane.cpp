@@ -8,7 +8,7 @@
 namespace CFH
 {
 	Plane::Plane() :
-		Normal(Vector3::UnitY),
+		Normal(Vector3::Zero),
 		D(0)
 	{
 	}
