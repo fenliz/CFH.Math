@@ -1,8 +1,10 @@
 #pragma once
+#include "Common.h"
+#include <initializer_list>
 
 namespace CFH {
 
-	struct Vector2
+	struct DLL_API Vector2 final
 	{
 	public:
 		static const Vector2 UnitX;
@@ -19,6 +21,7 @@ namespace CFH {
 		Vector2();
 		Vector2(float value);
 		Vector2(float x, float y);
+		Vector2(std::initializer_list<float>);
 		~Vector2();
 
 		Vector2 operator+(Vector2 vector) const;
@@ -52,6 +55,29 @@ namespace CFH {
 		static void Divide(Vector2 vector, float value, Vector2& result);
 		static Vector2 Negate(Vector2 vector);
 		static void Negate(Vector2 vector, Vector2& result);
+
+		float Length() const;
+		void Length(float& result) const;
+		static float Length(Vector2 vector);
+		static void Length(Vector2 vector, float& result);
+		float LengthSquared() const;
+		void LengthSquared(float& result) const;
+		static float LengthSquared(Vector2 vector);
+		static void LengthSquared(Vector2 vector, float& result);
+
+		static float Distance(Vector2 lhs, Vector2 rhs);
+		static void Distance(Vector2 lhs, Vector2 rhs, float& result);
+		static float DistanceSquared(Vector2 lhs, Vector2 rhs);
+		static void DistanceSquared(Vector2 lhs, Vector2 rhs, float& result);
+
+		static float Dot(Vector2 lhs, Vector2 rhs);
+		static void Dot(Vector2 lhs, Vector2 rhs, float& result);
+
+		static Vector2 Clamp(Vector2 value, Vector2 min, Vector2 max);
+		static void Clamp(Vector2 value, Vector2 min, Vector2 max, Vector2& result);
+		void Normalize();
+		static Vector2 Normalize(Vector2 vector);
+		static void Normalize(Vector2 vector, Vector2& result);
 	};
 }
 

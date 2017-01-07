@@ -1,7 +1,8 @@
-#include "Vector4.h"
-
 #include "Vector2.h"
 #include "Vector3.h"
+#include "Vector4.h"
+#include "Matrix4.h"
+#include "MathHelper.h"
 
 namespace CFH
 {
@@ -46,6 +47,14 @@ namespace CFH
 		Z(z),
 		W(w)
 	{
+	}
+	Vector4::Vector4(std::initializer_list<float> list)
+	{
+		auto it = list.begin();
+		X = *(it++);
+		Y = *(it++);
+		Z = *(it++);
+		W = *it;
 	}
 	Vector4::~Vector4()
 	{
@@ -234,5 +243,141 @@ namespace CFH
 		result.Y = -vector.Y;
 		result.Z = -vector.Z;
 		result.W = -vector.W;
+	}
+
+	float Vector4::Length() const
+	{
+		float result;
+		Length(*this, result);
+		return result;
+	}
+	void Vector4::Length(float& result) const
+	{
+		Length(*this, result);
+	}
+	float Vector4::Length(Vector4 vector)
+	{
+		float result;
+		Length(vector, result);
+		return result;
+	}
+	void Vector4::Length(Vector4 vector, float& result)
+	{
+		LengthSquared(vector, result);
+		result = MathHelper::Sqrt(result);
+	}
+
+	float Vector4::LengthSquared() const
+	{
+		float result;
+		LengthSquared(*this, result);
+		return result;
+	}
+	void Vector4::LengthSquared(float& result) const
+	{
+		LengthSquared(*this, result);
+	}
+	float Vector4::LengthSquared(Vector4 vector)
+	{
+		float result;
+		LengthSquared(vector, result);
+		return result;
+	}
+	void Vector4::LengthSquared(Vector4 vector, float& result)
+	{
+		result = (vector.X * vector.X) + (vector.Y * vector.Y) +
+			(vector.Z * vector.Z) + (vector.W * vector.W);
+	}
+
+	float Vector4::Distance(Vector4 lhs, Vector4 rhs)
+	{
+		float result;
+		Distance(lhs, rhs, result);
+		return result;
+	}
+	void Vector4::Distance(Vector4 lhs, Vector4 rhs, float& result)
+	{
+		DistanceSquared(lhs, rhs, result);
+		result = MathHelper::Sqrt(result);
+	}
+	float Vector4::DistanceSquared(Vector4 lhs, Vector4 rhs)
+	{
+		float result;
+		DistanceSquared(lhs, rhs, result);
+		return result;
+	}
+	void Vector4::DistanceSquared(Vector4 lhs, Vector4 rhs, float& result)
+	{
+		float deltaX, deltaY, deltaZ, deltaW;
+		deltaX = rhs.X - lhs.X;
+		deltaY = rhs.Y - lhs.Y;
+		deltaZ = rhs.Z - lhs.Z;
+		deltaW = rhs.W - lhs.W;
+		result = (deltaX * deltaX) + (deltaY * deltaY) +
+			(deltaZ * deltaZ) + (deltaW * deltaW);
+	}
+
+	float Vector4::Dot(Vector4 lhs, Vector4 rhs)
+	{
+		float result;
+		Dot(lhs, rhs, result);
+		return result;
+	}
+	void Vector4::Dot(Vector4 lhs, Vector4 rhs, float& result)
+	{
+		result = (lhs.X * rhs.X) + (lhs.Y * rhs.Y) +
+			(lhs.Z * rhs.Z) + (lhs.W * rhs.W);
+	}
+
+	Vector4 Vector4::Clamp(Vector4 vector, Vector4 min, Vector4 max)
+	{
+		Vector4 result;
+		Clamp(vector, min, max, result);
+		return result;
+	}
+	void Vector4::Clamp(Vector4 vector, Vector4 min, Vector4 max, Vector4& result)
+	{
+		MathHelper::Clamp(vector.X, min.X, max.X, result.X);
+		MathHelper::Clamp(vector.Y, min.Y, max.Y, result.Y);
+		MathHelper::Clamp(vector.Z, min.Z, max.Z, result.Z);
+		MathHelper::Clamp(vector.W, min.W, max.W, result.W);
+	}
+	void Vector4::Normalize()
+	{
+		float length = Length();
+		X /= length;
+		Y /= length;
+		Z /= length;
+		W /= length;
+	}
+	Vector4 Vector4::Normalize(Vector4 vector)
+	{
+		Vector4 result;
+		Normalize(vector, result);
+		return result;
+	}
+	void Vector4::Normalize(Vector4 vector, Vector4& result)
+	{
+		float length = Length(vector);
+		result.X = vector.X / length;
+		result.Y = vector.Y / length;
+		result.Z = vector.Z / length;
+		result.W = vector.W / length;
+	}
+
+	Vector4 Vector4::Transform(Vector4 vector, Matrix4 matrix)
+	{
+		Vector4 result;
+		Transform(vector, matrix, result);
+		return result;
+	}
+	void Vector4::Transform(Vector4 vector, Matrix4 matrix, Vector4& result)
+	{
+		Vector4 v;
+		Vector4::Dot(vector, Vector4(matrix.M11, matrix.M21, matrix.M31, matrix.M41), v.X);
+		Vector4::Dot(vector, Vector4(matrix.M12, matrix.M22, matrix.M32, matrix.M42), v.Y);
+		Vector4::Dot(vector, Vector4(matrix.M13, matrix.M23, matrix.M33, matrix.M43), v.Z);
+		Vector4::Dot(vector, Vector4(matrix.M14, matrix.M24, matrix.M34, matrix.M44), v.W);
+		result = v;
 	}
 }

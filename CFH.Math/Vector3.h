@@ -1,10 +1,14 @@
 #pragma once
+#include "Common.h"
+#include <initializer_list>
 
 namespace CFH
 {
-	class Vector2;
+	struct Vector2;
+	struct Matrix4;
+	struct Quaternion;
 
-	class Vector3
+	struct DLL_API Vector3 final
 	{
 	public:
 		static const Vector3 UnitX;
@@ -25,6 +29,7 @@ namespace CFH
 		Vector3(float value);
 		Vector3(Vector2 vector, float z);
 		Vector3(float x, float y, float z);
+		Vector3(std::initializer_list<float>);
 		~Vector3();
 
 		Vector3 operator+(Vector3 vector) const;
@@ -58,6 +63,38 @@ namespace CFH
 		static void Divide(Vector3 vector, float value, Vector3& result);
 		static Vector3 Negate(Vector3 vector);
 		static void Negate(Vector3 vector, Vector3& result);
+
+		float Length() const;
+		void Length(float& result) const;
+		static float Length(Vector3 vector);
+		static void Length(Vector3 vector, float& result);
+		float LengthSquared() const;
+		void LengthSquared(float& result) const;
+		static float LengthSquared(Vector3 vector);
+		static void LengthSquared(Vector3 vector, float& result);
+
+		static float Distance(Vector3 lhs, Vector3 rhs);
+		static void Distance(Vector3 lhs, Vector3 rhs, float& result);
+		static float DistanceSquared(Vector3 lhs, Vector3 rhs);
+		static void DistanceSquared(Vector3 lhs, Vector3 rhs, float& result);
+
+		static float Dot(Vector3 lhs, Vector3 rhs);
+		static void Dot(Vector3 lhs, Vector3 rhs, float& result);
+		static Vector3 Cross(Vector3 lhs, Vector3 rhs);
+		static void Cross(Vector3 lhs, Vector3 rhs, Vector3& result);
+
+		static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max);
+		static void Clamp(Vector3 value, Vector3 min, Vector3 max, Vector3& result);
+		void Normalize();
+		static Vector3 Normalize(Vector3 vector);
+		static void Normalize(Vector3 vector, Vector3& result);
+
+		static Vector3 Transform(Vector3 vector, Matrix4 matrix);
+		static void Transform(Vector3 vector, Matrix4 matrix, Vector3& result);
+		static Vector3 Vector3::Transform(Vector3 vector, Quaternion rotation);
+		static void Vector3::Transform(Vector3 vector, Quaternion rotation, Vector3& result);
+		static Vector3 Vector3::TransformNormal(Vector3 vector, Matrix4 matrix);
+		static void Vector3::TransformNormal(Vector3 vector, Matrix4 matrix, Vector3& result);
 	};
 }
 
