@@ -141,5 +141,27 @@ namespace CFH
 		{
 			result = fabs(value);
 		}
+
+		float MathHelper::DegreesToRadians(float value)
+		{
+			float result;
+			DegreesToRadians(value, result);
+			return result;
+		}
+		void MathHelper::DegreesToRadians(float value, float& result)
+		{
+			result = value * (PI / 180);
+		}
+
+		float MathHelper::RadiansToDegrees(float value)
+		{
+			float result;
+			RadiansToDegrees(value, result);
+			return result;
+		}
+		void MathHelper::RadiansToDegrees(float value, float& result)
+		{
+			result = value * (180 / PI);
+		}
 	}
 }

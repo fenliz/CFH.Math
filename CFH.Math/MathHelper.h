@@ -41,6 +41,12 @@ namespace CFH
 
 			static float Abs(float value);
 			static void Abs(float value, float& result);
+
+			static float DegreesToRadians(float value);
+			static void DegreesToRadians(float value, float& result);
+
+			static float RadiansToDegrees(float value);
+			static void RadiansToDegrees(float value, float& result);
 		};
 	}
 }
