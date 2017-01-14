@@ -4,36 +4,39 @@
 
 namespace CFH
 {
-	struct BoundingBox;
-	struct BoundingSphere;
-	struct BoundingFrustum;
-	struct Plane;
-
-	struct DLL_API Ray final
+	namespace Math
 	{
-	public:
-		Vector3 Position;
-		Vector3 Direction;
+		struct BoundingBox;
+		struct BoundingSphere;
+		struct BoundingFrustum;
+		struct Plane;
 
-		Ray();
-		Ray(Vector3 position, Vector3 direction);
-		~Ray();
+		struct DLL_API Ray final
+		{
+		public:
+			Vector3 Position;
+			Vector3 Direction;
 
-		bool operator==(Ray ray) const;
-		bool operator!=(Ray ray) const;
+			Ray();
+			Ray(Vector3 position, Vector3 direction);
+			~Ray();
 
-		bool Intersects(BoundingBox boundingBox) const;
-		bool Intersects(BoundingBox boundingBox, float& distance) const;
-		bool Intersects(BoundingBox boundingBox, Vector3& point) const;
-		bool Intersects(BoundingFrustum boundingFrustum) const;
-		bool Intersects(BoundingFrustum boundingFrustum, float& distance) const;
-		bool Intersects(BoundingFrustum boundingFrustum, Vector3& point) const;
-		bool Intersects(BoundingSphere boundingSphere) const;
-		bool Intersects(BoundingSphere boundingSphere, float& distance) const;
-		bool Intersects(BoundingSphere boundingSphere, Vector3& point) const;
-		bool Intersects(Plane plane) const;
-		bool Intersects(Plane plane, float& distance) const;
-		bool Intersects(Plane plane, Vector3& point) const;
-	};
+			bool operator==(Ray ray) const;
+			bool operator!=(Ray ray) const;
+
+			bool Intersects(BoundingBox boundingBox) const;
+			bool Intersects(BoundingBox boundingBox, float& distance) const;
+			bool Intersects(BoundingBox boundingBox, Vector3& point) const;
+			bool Intersects(BoundingFrustum boundingFrustum) const;
+			bool Intersects(BoundingFrustum boundingFrustum, float& distance) const;
+			bool Intersects(BoundingFrustum boundingFrustum, Vector3& point) const;
+			bool Intersects(BoundingSphere boundingSphere) const;
+			bool Intersects(BoundingSphere boundingSphere, float& distance) const;
+			bool Intersects(BoundingSphere boundingSphere, Vector3& point) const;
+			bool Intersects(Plane plane) const;
+			bool Intersects(Plane plane, float& distance) const;
+			bool Intersects(Plane plane, Vector3& point) const;
+		};
+	}
 }
 

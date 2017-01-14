@@ -6,7 +6,8 @@
 #include "Quaternion.h"
 
 #include "gtest\gtest.h"
-using namespace CFH;
+
+using namespace CFH::Math;
 
 void EXPECT_VECTOR_EQ(Vector2 vector, float x, float y);
 void EXPECT_VECTOR_NEAR(Vector2 vector, float x, float y, float abs_error);
