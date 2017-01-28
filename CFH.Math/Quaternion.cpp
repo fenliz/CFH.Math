@@ -24,14 +24,14 @@ namespace CFH
 			W(w)
 		{
 		}
-		Quaternion::Quaternion(Vector3 vector, float w) :
+		Quaternion::Quaternion(const Vector3& vector, float w) :
 			X(vector.X),
 			Y(vector.Y),
 			Z(vector.Z),
 			W(w)
 		{
 		}
-		Quaternion::Quaternion(Vector4 vector) :
+		Quaternion::Quaternion(const Vector4& vector) :
 			X(vector.X),
 			Y(vector.Y),
 			Z(vector.Z),
@@ -43,13 +43,13 @@ namespace CFH
 
 		}
 
-		Quaternion Quaternion::operator+(Quaternion quaternion) const
+		Quaternion Quaternion::operator+(const Quaternion& quaternion) const
 		{
 			Quaternion result;
 			Add(*this, quaternion, result);
 			return result;
 		}
-		Quaternion Quaternion::operator/(Quaternion quaternion) const
+		Quaternion Quaternion::operator/(const Quaternion& quaternion) const
 		{
 			Quaternion result;
 			Divide(*this, quaternion, result);
@@ -61,7 +61,7 @@ namespace CFH
 			Divide(*this, factor, result);
 			return result;
 		}
-		Quaternion Quaternion::operator*(Quaternion quaternion) const
+		Quaternion Quaternion::operator*(const Quaternion& quaternion) const
 		{
 			Quaternion result;
 			Multiply(*this, quaternion, result);
@@ -73,7 +73,7 @@ namespace CFH
 			Multiply(*this, factor, result);
 			return result;
 		}
-		Quaternion Quaternion::operator-(Quaternion quaternion) const
+		Quaternion Quaternion::operator-(const Quaternion& quaternion) const
 		{
 			Quaternion result;
 			Subtract(*this, quaternion, result);
@@ -85,37 +85,37 @@ namespace CFH
 			Negate(*this, result);
 			return result;
 		}
-		Quaternion Quaternion::operator+=(Quaternion quaternion)
+		const Quaternion& Quaternion::operator+=(const Quaternion& quaternion)
 		{
 			Add(*this, quaternion, *this);
 			return *this;
 		}
-		Quaternion Quaternion::operator-=(Quaternion quaternion)
+		const Quaternion& Quaternion::operator-=(const Quaternion& quaternion)
 		{
 			Subtract(*this, quaternion, *this);
 			return *this;
 		}
-		Quaternion Quaternion::operator*=(Quaternion quaternion)
+		const Quaternion& Quaternion::operator*=(const Quaternion& quaternion)
 		{
 			Multiply(*this, quaternion, *this);
 			return *this;
 		}
-		Quaternion Quaternion::operator/=(Quaternion quaternion)
+		const Quaternion& Quaternion::operator/=(const Quaternion& quaternion)
 		{
 			Divide(*this, quaternion, *this);
 			return *this;
 		}
-		bool Quaternion::operator==(Quaternion quaternion) const
+		bool Quaternion::operator==(const Quaternion& quaternion) const
 		{
 			return X == quaternion.X && Y == quaternion.Y &&
 				Z == quaternion.Z && W == quaternion.W;
 		}
-		bool Quaternion::operator!=(Quaternion quaternion) const
+		bool Quaternion::operator!=(const Quaternion& quaternion) const
 		{
 			return X != quaternion.X || Y != quaternion.Y ||
 				Z != quaternion.Z || W != quaternion.W;
 		}
-		Quaternion Quaternion::operator=(Quaternion quaternion)
+		const Quaternion& Quaternion::operator=(const Quaternion& quaternion)
 		{
 			X = quaternion.X;
 			Y = quaternion.Y;
@@ -194,89 +194,89 @@ namespace CFH
 			Vector3::Negate(result, result);
 		}
 
-		Quaternion Quaternion::Add(Quaternion quaternionA, Quaternion quaternionB)
+		Quaternion Quaternion::Add(const Quaternion& quaternionA, const Quaternion& quaternionB)
 		{
 			Quaternion result;
 			Add(quaternionA, quaternionB, result);
 			return result;
 		}
-		void Quaternion::Add(Quaternion quaternionA, Quaternion quaternionB, Quaternion& result)
+		void Quaternion::Add(const Quaternion& quaternionA, const Quaternion& quaternionB, Quaternion& result)
 		{
 			result.X = quaternionA.X + quaternionB.X;
 			result.Y = quaternionA.Y + quaternionB.Y;
 			result.Z = quaternionA.Z + quaternionB.Z;
 			result.W = quaternionA.W + quaternionB.W;
 		}
-		Quaternion Quaternion::Subtract(Quaternion quaternionA, Quaternion quaternionB)
+		Quaternion Quaternion::Subtract(const Quaternion& quaternionA, const Quaternion& quaternionB)
 		{
 			Quaternion result;
 			Subtract(quaternionA, quaternionB, result);
 			return result;
 		}
-		void Quaternion::Subtract(Quaternion quaternionA, Quaternion quaternionB, Quaternion& result)
+		void Quaternion::Subtract(const Quaternion& quaternionA, const Quaternion& quaternionB, Quaternion& result)
 		{
 			result.X = quaternionA.X - quaternionB.X;
 			result.Y = quaternionA.Y - quaternionB.Y;
 			result.Z = quaternionA.Z - quaternionB.Z;
 			result.W = quaternionA.W - quaternionB.W;
 		}
-		Quaternion Quaternion::Multiply(Quaternion quaternionA, Quaternion quaternionB)
+		Quaternion Quaternion::Multiply(const Quaternion& quaternionA, const Quaternion& quaternionB)
 		{
 			Quaternion result;
 			Multiply(quaternionA, quaternionB, result);
 			return result;
 		}
-		void Quaternion::Multiply(Quaternion quaternionA, Quaternion quaternionB, Quaternion& result)
+		void Quaternion::Multiply(const Quaternion& quaternionA, const Quaternion& quaternionB, Quaternion& result)
 		{
 			result.X = quaternionA.W * quaternionB.X + quaternionB.W * quaternionA.X + quaternionA.Y * quaternionB.Z - quaternionA.Z * quaternionB.Y;
 			result.Y = quaternionA.W * quaternionB.Y + quaternionB.W * quaternionA.Y + quaternionA.Z * quaternionB.X - quaternionA.X * quaternionB.Z;
 			result.Z = quaternionA.W * quaternionB.Z + quaternionB.W * quaternionA.Z + quaternionA.X * quaternionB.Y - quaternionA.Y * quaternionB.X;
 			result.W = quaternionA.W * quaternionB.W - quaternionA.X * quaternionB.X - quaternionA.Y * quaternionB.Y - quaternionA.Z * quaternionB.Z;
 		}
-		Quaternion Quaternion::Multiply(Quaternion quaternionA, float scalar)
+		Quaternion Quaternion::Multiply(const Quaternion& quaternionA, float scalar)
 		{
 			Quaternion result;
 			Multiply(quaternionA, scalar, result);
 			return result;
 		}
-		void Quaternion::Multiply(Quaternion quaternion, float scalar, Quaternion& result)
+		void Quaternion::Multiply(const Quaternion& quaternion, float scalar, Quaternion& result)
 		{
 			result.X = quaternion.X * scalar;
 			result.Y = quaternion.Y * scalar;
 			result.Z = quaternion.Z * scalar;
 			result.W = quaternion.W * scalar;
 		}
-		Quaternion Quaternion::Divide(Quaternion quaternionA, Quaternion quaternionB)
+		Quaternion Quaternion::Divide(const Quaternion& quaternionA, const Quaternion& quaternionB)
 		{
 			Quaternion result;
 			Divide(quaternionA, quaternionB, result);
 			return result;
 		}
-		void Quaternion::Divide(Quaternion quaternionA, Quaternion quaternionB, Quaternion& result)
+		void Quaternion::Divide(const Quaternion& quaternionA, const Quaternion& quaternionB, Quaternion& result)
 		{
 			Inverse(quaternionB, result);
 			Multiply(quaternionA, result, result);
 		}
-		Quaternion Quaternion::Divide(Quaternion quaternion, float factor)
+		Quaternion Quaternion::Divide(const Quaternion& quaternion, float factor)
 		{
 			Quaternion result;
 			Divide(quaternion, factor, result);
 			return result;
 		}
-		void Quaternion::Divide(Quaternion quaternion, float factor, Quaternion& result)
+		void Quaternion::Divide(const Quaternion& quaternion, float factor, Quaternion& result)
 		{
 			result.X = quaternion.X / factor;
 			result.Y = quaternion.Y / factor;
 			result.Z = quaternion.Z / factor;
 			result.W = quaternion.W / factor;
 		}
-		Quaternion Quaternion::Negate(Quaternion quaternion)
+		Quaternion Quaternion::Negate(const Quaternion& quaternion)
 		{
 			Quaternion result;
 			Negate(quaternion, result);
 			return result;
 		}
-		void Quaternion::Negate(Quaternion quaternion, Quaternion& result)
+		void Quaternion::Negate(const Quaternion& quaternion, Quaternion& result)
 		{
 			result.X = -quaternion.X;
 			result.Y = -quaternion.Y;
@@ -284,13 +284,13 @@ namespace CFH
 			result.W = -quaternion.W;
 		}
 
-		Quaternion Quaternion::CreateFromAxisAngle(Vector3 axis, float angle)
+		Quaternion Quaternion::CreateFromAxisAngle(const Vector3& axis, float angle)
 		{
 			Quaternion result;
 			CreateFromAxisAngle(axis, angle, result);
 			return result;
 		}
-		void Quaternion::CreateFromAxisAngle(Vector3 axis, float angle, Quaternion& result)
+		void Quaternion::CreateFromAxisAngle(const Vector3& axis, float angle, Quaternion& result)
 		{
 			float a = angle * 0.5f;
 			Vector3 v = axis;
@@ -301,13 +301,13 @@ namespace CFH
 			result.Z = v.Z;
 			result.W = MathHelper::Cos(a);
 		}
-		Quaternion Quaternion::CreateFromRotationMatrix(Matrix4 matrix)
+		Quaternion Quaternion::CreateFromRotationMatrix(const Matrix4& matrix)
 		{
 			Quaternion result;
 			CreateFromRotationMatrix(matrix, result);
 			return result;
 		}
-		void Quaternion::CreateFromRotationMatrix(Matrix4 matrix, Quaternion& result)
+		void Quaternion::CreateFromRotationMatrix(const Matrix4& matrix, Quaternion& result)
 		{
 			result.W = MathHelper::Sqrt(matrix.M11 + matrix.M22 + matrix.M33 + 1) / 2;
 			result.X = (matrix.M23 - matrix.M32) / (4 * result.W);
@@ -341,13 +341,13 @@ namespace CFH
 			result.Y = syo2 * cpo2 * cro2 - cyo2 * spo2 * sro2;
 		}
 
-		Quaternion Quaternion::Concatenate(Quaternion quaternionA, Quaternion quaternionB)
+		Quaternion Quaternion::Concatenate(const Quaternion& quaternionA, const Quaternion& quaternionB)
 		{
 			Quaternion result;
 			Concatenate(quaternionA, quaternionB, result);
 			return result;
 		}
-		void Quaternion::Concatenate(Quaternion quaternionA, Quaternion quaternionB, Quaternion& result)
+		void Quaternion::Concatenate(const Quaternion& quaternionA, const Quaternion& quaternionB, Quaternion& result)
 		{
 			Multiply(quaternionA, quaternionB, result);
 		}
@@ -355,37 +355,37 @@ namespace CFH
 		{
 			Conjugate(*this, *this);
 		}
-		Quaternion Quaternion::Conjugate(Quaternion quaternion)
+		Quaternion Quaternion::Conjugate(const Quaternion& quaternion)
 		{
 			Quaternion result;
 			Conjugate(quaternion, result);
 			return result;
 		}
-		void Quaternion::Conjugate(Quaternion quaternion, Quaternion& result)
+		void Quaternion::Conjugate(const Quaternion& quaternion, Quaternion& result)
 		{
 			result.X = -quaternion.X;
 			result.Y = -quaternion.Y;
 			result.Z = -quaternion.Z;
 			result.W = quaternion.W;
 		}
-		float Quaternion::Dot(Quaternion quaternionA, Quaternion quaternionB)
+		float Quaternion::Dot(const Quaternion& quaternionA, const Quaternion& quaternionB)
 		{
 			float result;
 			Dot(quaternionA, quaternionB, result);
 			return result;
 		}
-		void Quaternion::Dot(Quaternion quaternionA, Quaternion quaternionB, float& result)
+		void Quaternion::Dot(const Quaternion& quaternionA, const Quaternion& quaternionB, float& result)
 		{
 			result = quaternionA.X * quaternionB.X + quaternionA.Y * quaternionB.Y +
 				quaternionA.Z * quaternionB.Z + quaternionA.W * quaternionB.W;
 		}
-		Quaternion Quaternion::Inverse(Quaternion quaternion)
+		Quaternion Quaternion::Inverse(const Quaternion& quaternion)
 		{
 			Quaternion result;
 			Inverse(quaternion, result);
 			return result;
 		}
-		void Quaternion::Inverse(Quaternion quaternion, Quaternion& result)
+		void Quaternion::Inverse(const Quaternion& quaternion, Quaternion& result)
 		{
 			Conjugate(quaternion, result);
 			Multiply(result, 1.0f / result.LengthSquared(), result);
@@ -412,13 +412,13 @@ namespace CFH
 			result = X * X + Y * Y +
 				Z * Z + W * W;
 		}
-		Quaternion Quaternion::Lerp(Quaternion quaternionA, Quaternion quaternionB, float amount)
+		Quaternion Quaternion::Lerp(const Quaternion& quaternionA, const Quaternion& quaternionB, float amount)
 		{
 			Quaternion result;
 			Lerp(quaternionA, quaternionB, amount, result);
 			return result;
 		}
-		void Quaternion::Lerp(Quaternion quaternionA, Quaternion quaternionB, float amount, Quaternion& result)
+		void Quaternion::Lerp(const Quaternion& quaternionA, const Quaternion& quaternionB, float amount, Quaternion& result)
 		{
 			Multiply(quaternionA, 1.0f - amount, result);
 			Add(result, Multiply(quaternionB, amount), result);
@@ -428,23 +428,23 @@ namespace CFH
 		{
 			Normalize(*this, *this);
 		}
-		Quaternion Quaternion::Normalize(Quaternion quaternion)
+		Quaternion Quaternion::Normalize(const Quaternion& quaternion)
 		{
 			Quaternion result;
 			Normalize(quaternion, result);
 			return result;
 		}
-		void Quaternion::Normalize(Quaternion quaternion, Quaternion& result)
+		void Quaternion::Normalize(const Quaternion& quaternion, Quaternion& result)
 		{
 			Multiply(quaternion, 1.0f / quaternion.Length(), result);
 		}
-		Quaternion Quaternion::Slerp(Quaternion quaternionA, Quaternion quaternionB, float amount)
+		Quaternion Quaternion::Slerp(const Quaternion& quaternionA, const Quaternion& quaternionB, float amount)
 		{
 			Quaternion result;
 			Slerp(quaternionA, quaternionB, amount, result);
 			return result;
 		}
-		void Quaternion::Slerp(Quaternion quaternionA, Quaternion quaternionB, float amount, Quaternion& result)
+		void Quaternion::Slerp(const Quaternion& quaternionA, const Quaternion& quaternionB, float amount, Quaternion& result)
 		{
 			Quaternion p = quaternionA;
 			Quaternion q = quaternionB;

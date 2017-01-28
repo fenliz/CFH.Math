@@ -15,7 +15,7 @@ namespace CFH
 		BoundingFrustum::BoundingFrustum()
 		{
 		}
-		BoundingFrustum::BoundingFrustum(Matrix4 value)
+		BoundingFrustum::BoundingFrustum(const Matrix4& value)
 		{
 			SetViewProjection(value);
 		}
@@ -23,15 +23,15 @@ namespace CFH
 		{
 		}
 
-		bool BoundingFrustum::operator==(BoundingFrustum boundingFrustum) const
+		bool BoundingFrustum::operator==(const BoundingFrustum& boundingFrustum) const
 		{
 			return viewProjection_ == boundingFrustum.viewProjection_;
 		}
-		bool BoundingFrustum::operator!=(BoundingFrustum boundingFrustum) const
+		bool BoundingFrustum::operator!=(const BoundingFrustum& boundingFrustum) const
 		{
 			return viewProjection_ != boundingFrustum.viewProjection_;
 		}
-		BoundingFrustum BoundingFrustum::operator=(BoundingFrustum boundingFrustum)
+		const BoundingFrustum& BoundingFrustum::operator=(const BoundingFrustum& boundingFrustum)
 		{
 			viewProjection_ = boundingFrustum.viewProjection_;
 			inverseViewProjection_ = boundingFrustum.inverseViewProjection_;
@@ -96,7 +96,7 @@ namespace CFH
 
 		}
 
-		void BoundingFrustum::SetViewProjection(Matrix4 matrix)
+		void BoundingFrustum::SetViewProjection(const Matrix4& matrix)
 		{
 			viewProjection_ = matrix;
 			Matrix4::Invert(viewProjection_, inverseViewProjection_);
@@ -113,82 +113,66 @@ namespace CFH
 			Plane::CreateFromPoints(corners_[1], corners_[2], corners_[5], planes_[4]); //Top
 			Plane::CreateFromPoints(corners_[0], corners_[4], corners_[3], planes_[5]); //Bottom
 		}
-		Matrix4 BoundingFrustum::GetViewProjection() const
+		const Matrix4& BoundingFrustum::GetViewProjection() const
 		{
-			Matrix4 result;
-			GetViewProjection(result);
-			return result;
+			return viewProjection_;
 		}
 		void BoundingFrustum::GetViewProjection(Matrix4& result) const
 		{
 			result = viewProjection_;
 		}
-		Matrix4 BoundingFrustum::GetInverseViewProjection() const
+		const Matrix4& BoundingFrustum::GetInverseViewProjection() const
 		{
-			Matrix4 result;
-			GetInverseViewProjection(result);
-			return result;
+			return inverseViewProjection_;
 		}
 		void BoundingFrustum::GetInverseViewProjection(Matrix4& result) const
 		{
 			result = inverseViewProjection_;
 		}
 
-		Plane BoundingFrustum::GetTop() const
+		const Plane& BoundingFrustum::GetTop() const
 		{
-			Plane result;
-			GetTop(result);
-			return result;
+			return planes_[4];
 		}
 		void BoundingFrustum::GetTop(Plane& result) const
 		{
 			result = planes_[4];
 		}
-		Plane BoundingFrustum::GetBottom() const
+		const Plane& BoundingFrustum::GetBottom() const
 		{
-			Plane result;
-			GetBottom(result);
-			return result;
+			return planes_[5];
 		}
 		void BoundingFrustum::GetBottom(Plane& result) const
 		{
 			result = planes_[5];
 		}
-		Plane BoundingFrustum::GetFar() const
+		const Plane& BoundingFrustum::GetFar() const
 		{
-			Plane result;
-			GetFar(result);
-			return result;
+			return planes_[1];
 		}
 		void BoundingFrustum::GetFar(Plane& result) const
 		{
 			result = planes_[1];
 		}
-		Plane BoundingFrustum::GetNear() const
+		const Plane& BoundingFrustum::GetNear() const
 		{
-			Plane result;
-			GetNear(result);
-			return result;
+			return planes_[0];
 		}
 		void BoundingFrustum::GetNear(Plane& result) const
 		{
 			result = planes_[0];
 		}
-		Plane BoundingFrustum::GetLeft() const
+		const Plane& BoundingFrustum::GetLeft() const
 		{
-			Plane result;
-			GetLeft(result);
-			return result;
+			return planes_[3];
 		}
 		void BoundingFrustum::GetLeft(Plane& result) const
 		{
 			result = planes_[3];
 		}
-		Plane BoundingFrustum::GetRight() const
+		const Plane& BoundingFrustum::GetRight() const
 		{
-			Plane result;
-			GetRight(result);
-			return result;
+			return planes_[2];
 		}
 		void BoundingFrustum::GetRight(Plane& result) const
 		{
@@ -199,57 +183,36 @@ namespace CFH
 			for (char i = 0; i < 8 && i < size; i++)
 				GetCorner(i, corners[i]);
 		}
-		Vector3 BoundingFrustum::GetCorner(int index) const
+		const Vector3& BoundingFrustum::GetCorner(int index) const
 		{
-			Vector3 result;
-			GetCorner(index, result);
-			return result;
+			return corners_[index];
 		}
 		void BoundingFrustum::GetCorner(int index, Vector3& result) const
 		{
 			result = corners_[index];
 		}
-		Plane BoundingFrustum::GetPlane(int index) const
+		const Plane& BoundingFrustum::GetPlane(int index) const
 		{
-			Plane result;
-			GetPlane(index, result);
-			return result;
+			if (index >= 0 && index <= 5)
+				return planes_[index];
+			else
+				throw std::invalid_argument("Max valid index of a BoundingFrustrums planes is 5.");
 		}
 		void BoundingFrustum::GetPlane(int index, Plane& result) const
 		{
-			switch (index)
-			{
-			case 0:
-				GetNear(result);
-				return;
-			case 1:
-				GetFar(result);
-				return;
-			case 2:
-				GetRight(result);
-				return;
-			case 3:
-				GetLeft(result);
-				return;
-			case 4:
-				GetTop(result);
-				return;
-			case 5:
-				GetBottom(result);
-				return;
-
-			default:
+			if (index >= 0 && index <= 5)
+				result = planes_[index];
+			else
 				throw std::invalid_argument("Max valid index of a BoundingFrustrums planes is 5.");
-			}
 		}
 
-		ContainmentType BoundingFrustum::Contains(Vector3 point) const
+		ContainmentType BoundingFrustum::Contains(const Vector3& point) const
 		{
 			ContainmentType result;
 			Contains(point, result);
 			return result;
 		}
-		void BoundingFrustum::Contains(Vector3 point, ContainmentType& result) const
+		void BoundingFrustum::Contains(const Vector3& point, ContainmentType& result) const
 		{
 			Vector4 v = Vector4(point.X, point.Y, point.Z, 1);
 			Vector4::Transform(v, viewProjection_, v);
@@ -260,13 +223,13 @@ namespace CFH
 			else
 				result = ContainmentType::Contains;
 		}
-		ContainmentType BoundingFrustum::Contains(BoundingBox boundingBox) const
+		ContainmentType BoundingFrustum::Contains(const BoundingBox& boundingBox) const
 		{
 			ContainmentType result;
 			Contains(boundingBox, result);
 			return result;
 		}
-		void BoundingFrustum::Contains(BoundingBox boundingBox, ContainmentType& result) const
+		void BoundingFrustum::Contains(const BoundingBox& boundingBox, ContainmentType& result) const
 		{
 			Vector3 v;
 			char i, in = 0, out = 0;
@@ -309,13 +272,13 @@ namespace CFH
 
 			result = ContainmentType::Disjoint;
 		}
-		ContainmentType BoundingFrustum::Contains(BoundingFrustum boundingFrustum) const
+		ContainmentType BoundingFrustum::Contains(const BoundingFrustum& boundingFrustum) const
 		{
 			ContainmentType result;
 			Contains(boundingFrustum, result);
 			return result;
 		}
-		void BoundingFrustum::Contains(BoundingFrustum boundingFrustum, ContainmentType& result) const
+		void BoundingFrustum::Contains(const BoundingFrustum& boundingFrustum, ContainmentType& result) const
 		{
 			Vector3 v;
 			float dist, aMax, aMin, bMax, bMin;
@@ -353,13 +316,13 @@ namespace CFH
 			else
 				result = ContainmentType::Intersects;
 		}
-		ContainmentType BoundingFrustum::Contains(BoundingSphere boundingSphere) const
+		ContainmentType BoundingFrustum::Contains(const BoundingSphere& boundingSphere) const
 		{
 			ContainmentType result;
 			Contains(boundingSphere, result);
 			return result;
 		}
-		void BoundingFrustum::Contains(BoundingSphere boundingSphere, ContainmentType& result) const
+		void BoundingFrustum::Contains(const BoundingSphere& boundingSphere, ContainmentType& result) const
 		{
 			bool intersection = false;
 			float dist;
@@ -382,59 +345,59 @@ namespace CFH
 				result = ContainmentType::Contains;
 		}
 
-		bool BoundingFrustum::Intersects(BoundingBox boundingBox) const
+		bool BoundingFrustum::Intersects(const BoundingBox& boundingBox) const
 		{
 			bool result;
 			Intersects(boundingBox, result);
 			return result;
 		}
-		void BoundingFrustum::Intersects(BoundingBox boundingBox, bool& result) const
+		void BoundingFrustum::Intersects(const BoundingBox& boundingBox, bool& result) const
 		{
 			ContainmentType c;
 			Contains(boundingBox, c);
 			result = c != ContainmentType::Disjoint;
 		}
-		bool BoundingFrustum::Intersects(BoundingFrustum boundingFrustum) const
+		bool BoundingFrustum::Intersects(const BoundingFrustum& boundingFrustum) const
 		{
 			bool result;
 			Intersects(boundingFrustum, result);
 			return result;
 		}
-		void BoundingFrustum::Intersects(BoundingFrustum boundingFrustum, bool& result) const
+		void BoundingFrustum::Intersects(const BoundingFrustum& boundingFrustum, bool& result) const
 		{
 			ContainmentType c;
 			Contains(boundingFrustum, c);
 			result = c != ContainmentType::Disjoint;
 		}
-		bool BoundingFrustum::Intersects(BoundingSphere boundingSphere) const
+		bool BoundingFrustum::Intersects(const BoundingSphere& boundingSphere) const
 		{
 			bool result;
 			Intersects(boundingSphere, result);
 			return result;
 		}
-		void BoundingFrustum::Intersects(BoundingSphere boundingSphere, bool& result) const
+		void BoundingFrustum::Intersects(const BoundingSphere& boundingSphere, bool& result) const
 		{
 			ContainmentType c;
 			Contains(boundingSphere, c);
 			result = c != ContainmentType::Disjoint;
 		}
-		PlaneIntersectionType BoundingFrustum::Intersects(Plane plane) const
+		PlaneIntersectionType BoundingFrustum::Intersects(const Plane& plane) const
 		{
 			PlaneIntersectionType result;
 			Intersects(plane, result);
 			return result;
 		}
-		void BoundingFrustum::Intersects(Plane plane, PlaneIntersectionType& result) const
+		void BoundingFrustum::Intersects(const Plane& plane, PlaneIntersectionType& result) const
 		{
 			plane.Intersects(*this, result);
 		}
-		bool BoundingFrustum::Intersects(Ray ray, float& distance) const
+		bool BoundingFrustum::Intersects(const Ray& ray, float& distance) const
 		{
 			bool result;
 			Intersects(ray, distance, result);
 			return result;
 		}
-		void BoundingFrustum::Intersects(Ray ray, float& distance, bool& result) const
+		void BoundingFrustum::Intersects(const Ray& ray, float& distance, bool& result) const
 		{
 			result = ray.Intersects(*this, distance);
 		}

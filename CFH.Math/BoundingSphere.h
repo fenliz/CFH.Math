@@ -21,39 +21,39 @@ namespace CFH
 			float Radius;
 
 			BoundingSphere();
-			BoundingSphere(Vector3 center, float radius);
+			BoundingSphere(const Vector3& center, float radius);
 			~BoundingSphere();
 
-			bool operator==(BoundingSphere boundingSphere) const;
-			bool operator!=(BoundingSphere boundingSphere) const;
-			BoundingSphere operator=(BoundingSphere boundingSphere);
+			bool operator==(const BoundingSphere& boundingSphere) const;
+			bool operator!=(const BoundingSphere& boundingSphere) const;
+			const BoundingSphere& operator=(const BoundingSphere& boundingSphere);
 
-			static BoundingSphere CreateFromBoundingBox(BoundingBox boundingBox);
-			static void CreateFromBoundingBox(BoundingBox boundingBox, BoundingSphere& result);
-			static BoundingSphere CreateFromFrustum(BoundingFrustum boundingFrustum);
-			static void CreateFromFrustum(BoundingFrustum boundingFrustum, BoundingSphere& result);
-			static BoundingSphere CreateFromPoints(Vector3 points[], int count);
-			static void CreateFromPoints(Vector3 points[], int count, BoundingSphere& result);
-			static BoundingSphere CreateMerged(BoundingSphere boundingSphere, BoundingSphere boundingSphere2);
-			static void CreateMerged(BoundingSphere boundingSphere, BoundingSphere boundingSphere2, BoundingSphere& result);
+			static BoundingSphere CreateFromBoundingBox(const BoundingBox& boundingBox);
+			static void CreateFromBoundingBox(const BoundingBox& boundingBox, BoundingSphere& result);
+			static BoundingSphere CreateFromFrustum(const BoundingFrustum& boundingFrustum);
+			static void CreateFromFrustum(const BoundingFrustum& boundingFrustum, BoundingSphere& result);
+			static BoundingSphere CreateFromPoints(const Vector3 points[], int count);
+			static void CreateFromPoints(const Vector3 points[], int count, BoundingSphere& result);
+			static BoundingSphere CreateMerged(const BoundingSphere& boundingSphere, const BoundingSphere& boundingSphere2);
+			static void CreateMerged(const BoundingSphere& boundingSphere, const BoundingSphere& boundingSphere2, BoundingSphere& result);
 
-			ContainmentType Contains(Vector3 point) const;
-			void Contains(Vector3 point, ContainmentType& result) const;
-			ContainmentType Contains(BoundingBox boundingBox) const;
-			void Contains(BoundingBox boundingBox, ContainmentType& result) const;
-			ContainmentType Contains(BoundingFrustum boundingFrustum) const;
-			void Contains(BoundingFrustum boundingFrustum, ContainmentType& result) const;
-			ContainmentType Contains(BoundingSphere boundingSphere) const;
-			void Contains(BoundingSphere boundingSphere, ContainmentType& result) const;
+			ContainmentType Contains(const Vector3& point) const;
+			void Contains(const Vector3& point, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingBox& boundingBox) const;
+			void Contains(const BoundingBox& boundingBox, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingFrustum& boundingFrustum) const;
+			void Contains(const BoundingFrustum& boundingFrustum, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingSphere& boundingSphere) const;
+			void Contains(const BoundingSphere& boundingSphere, ContainmentType& result) const;
 
-			bool Intersects(BoundingBox boundingBox) const;
-			bool Intersects(BoundingFrustum boundingFrustum) const;
-			bool Intersects(BoundingSphere boundingSphere) const;
-			PlaneIntersectionType Intersects(Plane plane) const;
-			void Intersects(Plane plane, PlaneIntersectionType& result) const;
-			bool Intersects(Ray ray, float& distance) const;
+			bool Intersects(const BoundingBox& boundingBox) const;
+			bool Intersects(const BoundingFrustum& boundingFrustum) const;
+			bool Intersects(const BoundingSphere& boundingSphere) const;
+			PlaneIntersectionType Intersects(const Plane& plane) const;
+			void Intersects(const Plane& plane, PlaneIntersectionType& result) const;
+			bool Intersects(const Ray& ray, float& distance) const;
 
-			BoundingSphere Transform(Matrix4 matrix);
+			BoundingSphere Transform(const Matrix4& matrix);
 			void Transform(Matrix4 matrix, BoundingSphere& result);
 		};
 	}

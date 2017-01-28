@@ -16,7 +16,7 @@ namespace CFH
 			Direction(Vector3::Zero)
 		{
 		}
-		Ray::Ray(Vector3 position, Vector3 direction) :
+		Ray::Ray(const Vector3& position, const Vector3& direction) :
 			Position(position),
 			Direction(direction)
 		{
@@ -25,21 +25,21 @@ namespace CFH
 		{
 		}
 
-		bool Ray::operator==(Ray ray) const
+		bool Ray::operator==(const Ray& ray) const
 		{
 			return Position == ray.Position && Direction == ray.Direction;
 		}
-		bool Ray::operator!=(Ray ray) const
+		bool Ray::operator!=(const Ray& ray) const
 		{
 			return Position != ray.Position || Direction != ray.Direction;
 		}
 
-		bool Ray::Intersects(BoundingBox boundingBox) const
+		bool Ray::Intersects(const BoundingBox& boundingBox) const
 		{
 			float distance;
 			return Intersects(boundingBox, distance);
 		}
-		bool Ray::Intersects(BoundingBox boundingBox, float& distance) const
+		bool Ray::Intersects(const BoundingBox& boundingBox, float& distance) const
 		{
 			Vector3 invDir(1.0f / Direction.X, 1.0f / Direction.Y, 1.0f / Direction.Z);
 
@@ -68,19 +68,19 @@ namespace CFH
 			distance = tmin;
 			return true;
 		}
-		bool Ray::Intersects(BoundingBox boundingBox, Vector3& point) const
+		bool Ray::Intersects(const BoundingBox& boundingBox, Vector3& point) const
 		{
 			float distance;
 			bool result = Intersects(boundingBox, distance);
 			point = Position + (Direction * distance);
 			return result;
 		}
-		bool Ray::Intersects(BoundingFrustum boundingFrustum) const
+		bool Ray::Intersects(const BoundingFrustum& boundingFrustum) const
 		{
 			float distance;
 			return Intersects(boundingFrustum, distance);
 		}
-		bool Ray::Intersects(BoundingFrustum boundingFrustum, float& distance) const
+		bool Ray::Intersects(const BoundingFrustum& boundingFrustum, float& distance) const
 		{
 			ContainmentType c;
 			boundingFrustum.Contains(Position, c);
@@ -124,19 +124,19 @@ namespace CFH
 			}
 			return true;
 		}
-		bool Ray::Intersects(BoundingFrustum boundingFrustum, Vector3& point) const
+		bool Ray::Intersects(const BoundingFrustum& boundingFrustum, Vector3& point) const
 		{
 			float distance;
 			bool result = Intersects(boundingFrustum, distance);
 			point = Position + (Direction * distance);
 			return result;
 		}
-		bool Ray::Intersects(BoundingSphere boundingSphere) const
+		bool Ray::Intersects(const BoundingSphere& boundingSphere) const
 		{
 			float distance;
 			return Intersects(boundingSphere, distance);
 		}
-		bool Ray::Intersects(BoundingSphere boundingSphere, float& distance) const
+		bool Ray::Intersects(const BoundingSphere& boundingSphere, float& distance) const
 		{
 			Vector3 diff;
 			Vector3::Subtract(boundingSphere.Center, Position, diff);
@@ -167,19 +167,19 @@ namespace CFH
 			distance = 0;
 			return false;
 		}
-		bool Ray::Intersects(BoundingSphere boundingSphere, Vector3& point) const
+		bool Ray::Intersects(const BoundingSphere& boundingSphere, Vector3& point) const
 		{
 			float distance;
 			bool result = Intersects(boundingSphere, distance);
 			point = Position + (Direction * distance);
 			return result;
 		}
-		bool Ray::Intersects(Plane plane) const
+		bool Ray::Intersects(const Plane& plane) const
 		{
 			float distance;
 			return Intersects(plane, distance);
 		}
-		bool Ray::Intersects(Plane plane, float& distance) const
+		bool Ray::Intersects(const Plane& plane, float& distance) const
 		{
 			float denominator = Vector3::Dot(Direction, plane.Normal);
 			if (MathHelper::Abs(denominator) < 0.0001f)
@@ -201,7 +201,7 @@ namespace CFH
 
 			return false;
 		}
-		bool Ray::Intersects(Plane plane, Vector3& point) const
+		bool Ray::Intersects(const Plane& plane, Vector3& point) const
 		{
 			float distance;
 			bool result = Intersects(plane, distance);

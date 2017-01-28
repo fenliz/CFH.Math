@@ -69,59 +69,59 @@ namespace CFH
 		{
 		}
 
-		Matrix4 Matrix4::operator+(Matrix4 matrix) const
+		Matrix4 Matrix4::operator+(const Matrix4& matrix) const
 		{
 			Matrix4 result;
 			Add(*this, matrix, result);
 			return result;
 		}
-		Matrix4 Matrix4::operator-(Matrix4 matrix) const
+		Matrix4 Matrix4::operator-(const Matrix4& matrix) const
 		{
 			Matrix4 result;
 			Subtract(*this, matrix, result);
 			return result;
 		}
-		Matrix4 Matrix4::operator*(Matrix4 matrix) const
+		Matrix4 Matrix4::operator*(const Matrix4& matrix) const
 		{
 			Matrix4 result;
 			Multiply(*this, matrix, result);
 			return result;
 		}
-		Matrix4 Matrix4::operator/(Matrix4 matrix) const
+		Matrix4 Matrix4::operator/(const Matrix4& matrix) const
 		{
 			Matrix4 result;
 			Divide(*this, matrix, result);
 			return result;
 		}
-		Matrix4 Matrix4::operator+=(Matrix4 matrix)
+		const Matrix4& Matrix4::operator+=(const Matrix4& matrix)
 		{
 			Matrix4 temp;
 			Add(*this, matrix, temp);
 			*this = temp;
 			return *this;
 		}
-		Matrix4 Matrix4::operator-=(Matrix4 matrix)
+		const Matrix4& Matrix4::operator-=(const Matrix4& matrix)
 		{
 			Matrix4 temp;
 			Subtract(*this, matrix, temp);
 			*this = temp;
 			return *this;
 		}
-		Matrix4 Matrix4::operator*=(Matrix4 matrix)
+		const Matrix4& Matrix4::operator*=(const Matrix4& matrix)
 		{
 			Matrix4 temp;
 			Multiply(*this, matrix, temp);
 			*this = temp;
 			return *this;
 		}
-		Matrix4 Matrix4::operator/=(Matrix4 matrix)
+		const Matrix4& Matrix4::operator/=(const Matrix4& matrix)
 		{
 			Matrix4 temp;
 			Divide(*this, matrix, temp);
 			*this = temp;
 			return *this;
 		}
-		bool Matrix4::operator==(Matrix4 matrix) const
+		bool Matrix4::operator==(const Matrix4& matrix) const
 		{
 			return
 				M11 == matrix.M11 && M12 == matrix.M12 && M13 == matrix.M13 && M14 == matrix.M14 &&
@@ -129,7 +129,7 @@ namespace CFH
 				M31 == matrix.M31 && M32 == matrix.M32 && M33 == matrix.M33 && M34 == matrix.M34 &&
 				M41 == matrix.M41 && M42 == matrix.M42 && M43 == matrix.M43 && M44 == matrix.M44;
 		}
-		bool Matrix4::operator!=(Matrix4 matrix) const
+		bool Matrix4::operator!=(const Matrix4& matrix) const
 		{
 			return
 				M11 != matrix.M11 || M12 != matrix.M12 || M13 != matrix.M13 || M14 != matrix.M14 ||
@@ -137,7 +137,7 @@ namespace CFH
 				M31 != matrix.M31 || M32 != matrix.M32 || M33 != matrix.M33 || M34 != matrix.M34 ||
 				M41 != matrix.M41 || M42 != matrix.M42 || M43 != matrix.M43 || M44 != matrix.M44;
 		}
-		Matrix4 Matrix4::operator=(Matrix4 matrix)
+		const Matrix4& Matrix4::operator=(const Matrix4& matrix)
 		{
 			M11 = matrix.M11; M12 = matrix.M12; M13 = matrix.M13; M14 = matrix.M14;
 			M21 = matrix.M21; M22 = matrix.M22; M23 = matrix.M23; M24 = matrix.M24;
@@ -202,13 +202,13 @@ namespace CFH
 			}
 		}
 
-		Matrix4 Matrix4::Add(Matrix4 lhs, Matrix4 rhs)
+		Matrix4 Matrix4::Add(const Matrix4& lhs, const Matrix4& rhs)
 		{
 			Matrix4 result;
 			Add(lhs, rhs, result);
 			return result;
 		}
-		void Matrix4::Add(Matrix4 lhs, Matrix4 rhs, Matrix4& result)
+		void Matrix4::Add(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result)
 		{
 			result.M11 = lhs.M11 + rhs.M11;
 			result.M12 = lhs.M12 + rhs.M12;
@@ -227,13 +227,13 @@ namespace CFH
 			result.M43 = lhs.M43 + rhs.M43;
 			result.M44 = lhs.M44 + rhs.M44;
 		}
-		Matrix4 Matrix4::Subtract(Matrix4 lhs, Matrix4 rhs)
+		Matrix4 Matrix4::Subtract(const Matrix4& lhs, const Matrix4& rhs)
 		{
 			Matrix4 result;
 			Subtract(lhs, rhs, result);
 			return result;
 		}
-		void Matrix4::Subtract(Matrix4 lhs, Matrix4 rhs, Matrix4& result)
+		void Matrix4::Subtract(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result)
 		{
 			result.M11 = lhs.M11 - rhs.M11;
 			result.M12 = lhs.M12 - rhs.M12;
@@ -252,13 +252,13 @@ namespace CFH
 			result.M43 = lhs.M43 - rhs.M43;
 			result.M44 = lhs.M44 - rhs.M44;
 		}
-		Matrix4 Matrix4::Multiply(Matrix4 lhs, Matrix4 rhs)
+		Matrix4 Matrix4::Multiply(const Matrix4& lhs, const Matrix4& rhs)
 		{
 			Matrix4 result;
 			Multiply(lhs, rhs, result);
 			return result;
 		}
-		void Matrix4::Multiply(Matrix4 lhs, Matrix4 rhs, Matrix4& result)
+		void Matrix4::Multiply(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result)
 		{
 			result.M11 = lhs.M11 * rhs.M11 + lhs.M12 * rhs.M21 + lhs.M13 * rhs.M31 + lhs.M14 * rhs.M41;
 			result.M12 = lhs.M11 * rhs.M12 + lhs.M12 * rhs.M22 + lhs.M13 * rhs.M32 + lhs.M14 * rhs.M42;
@@ -280,13 +280,13 @@ namespace CFH
 			result.M43 = lhs.M41 * rhs.M13 + lhs.M42 * rhs.M23 + lhs.M43 * rhs.M33 + lhs.M44 * rhs.M43;
 			result.M44 = lhs.M41 * rhs.M14 + lhs.M42 * rhs.M24 + lhs.M43 * rhs.M34 + lhs.M44 * rhs.M44;
 		}
-		Matrix4 Matrix4::Multiply(Matrix4 matrix, float value)
+		Matrix4 Matrix4::Multiply(const Matrix4& matrix, float value)
 		{
 			Matrix4 result;
 			Multiply(matrix, value, result);
 			return result;
 		}
-		void Matrix4::Multiply(Matrix4 matrix, float value, Matrix4& result)
+		void Matrix4::Multiply(const Matrix4& matrix, float value, Matrix4& result)
 		{
 			result.M11 = matrix.M11 * value;
 			result.M12 = matrix.M12 * value;
@@ -305,13 +305,13 @@ namespace CFH
 			result.M43 = matrix.M43 * value;
 			result.M44 = matrix.M44 * value;
 		}
-		Matrix4 Matrix4::Divide(Matrix4 lhs, Matrix4 rhs)
+		Matrix4 Matrix4::Divide(const Matrix4& lhs, const Matrix4& rhs)
 		{
 			Matrix4 result;
 			Divide(lhs, rhs, result);
 			return result;
 		}
-		void Matrix4::Divide(Matrix4 lhs, Matrix4 rhs, Matrix4& result)
+		void Matrix4::Divide(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result)
 		{
 			result.M11 = lhs.M11 / rhs.M11;
 			result.M12 = lhs.M12 / rhs.M12;
@@ -330,13 +330,13 @@ namespace CFH
 			result.M43 = lhs.M43 / rhs.M43;
 			result.M44 = lhs.M44 / rhs.M44;
 		}
-		Matrix4 Matrix4::Divide(Matrix4 matrix, float value)
+		Matrix4 Matrix4::Divide(const Matrix4& matrix, float value)
 		{
 			Matrix4 result;
 			Divide(matrix, value, result);
 			return result;
 		}
-		void Matrix4::Divide(Matrix4 matrix, float value, Matrix4& result)
+		void Matrix4::Divide(const Matrix4& matrix, float value, Matrix4& result)
 		{
 			result.M11 = matrix.M11 / value;
 			result.M12 = matrix.M12 / value;
@@ -355,13 +355,13 @@ namespace CFH
 			result.M43 = matrix.M43 / value;
 			result.M44 = matrix.M44 / value;
 		}
-		Matrix4 Matrix4::Negate(Matrix4 vector)
+		Matrix4 Matrix4::Negate(const Matrix4& vector)
 		{
 			Matrix4 result;
 			Negate(vector, result);
 			return result;
 		}
-		void Matrix4::Negate(Matrix4 vector, Matrix4& result)
+		void Matrix4::Negate(const Matrix4& vector, Matrix4& result)
 		{
 			result.M11 = -vector.M11;
 			result.M12 = -vector.M12;
@@ -381,49 +381,49 @@ namespace CFH
 			result.M44 = -vector.M44;
 		}
 
-		void Matrix4::SetForward(Vector3 vector)
+		void Matrix4::SetForward(const Vector3& vector)
 		{
 			M31 = vector.X;
 			M32 = vector.Y;
 			M33 = vector.Z;
 		}
-		void Matrix4::SetBackward(Vector3 vector)
+		void Matrix4::SetBackward(const Vector3& vector)
 		{
 			M31 = -vector.X;
 			M32 = -vector.Y;
 			M33 = -vector.Z;
 		}
-		void Matrix4::SetUp(Vector3 vector)
+		void Matrix4::SetUp(const Vector3& vector)
 		{
 			M21 = vector.X;
 			M22 = vector.Y;
 			M23 = vector.Z;
 		}
-		void Matrix4::SetDown(Vector3 vector)
+		void Matrix4::SetDown(const Vector3& vector)
 		{
 			M21 = -vector.X;
 			M22 = -vector.Y;
 			M23 = -vector.Z;
 		}
-		void Matrix4::SetRight(Vector3 vector)
+		void Matrix4::SetRight(const Vector3& vector)
 		{
 			M11 = vector.X;
 			M12 = vector.Y;
 			M13 = vector.Z;
 		}
-		void Matrix4::SetLeft(Vector3 vector)
+		void Matrix4::SetLeft(const Vector3& vector)
 		{
 			M11 = -vector.X;
 			M12 = -vector.Y;
 			M13 = -vector.Z;
 		}
-		void Matrix4::SetTranslation(Vector3 vector)
+		void Matrix4::SetTranslation(const Vector3& vector)
 		{
 			M41 = vector.X;
 			M42 = vector.Y;
 			M43 = vector.Z;
 		}
-		void Matrix4::SetScale(Vector3 vector)
+		void Matrix4::SetScale(const Vector3& vector)
 		{
 			float scaleX, scaleY, scaleZ;
 			GetScaleX(scaleX);
@@ -631,13 +631,13 @@ namespace CFH
 			return true;
 		}
 
-		Matrix4 Matrix4::CreateTranslation(Vector3 vector)
+		Matrix4 Matrix4::CreateTranslation(const Vector3& vector)
 		{
 			Matrix4 result;
 			CreateTranslation(vector, result);
 			return result;
 		}
-		void Matrix4::CreateTranslation(Vector3 vector, Matrix4& result)
+		void Matrix4::CreateTranslation(const Vector3& vector, Matrix4& result)
 		{
 			result = Matrix4::Zero;
 			result.M41 = vector.X;
@@ -656,13 +656,13 @@ namespace CFH
 		{
 			CreateScale(Vector3(value, value, value), result);
 		}
-		Matrix4 Matrix4::CreateScale(Vector3 vector)
+		Matrix4 Matrix4::CreateScale(const Vector3& vector)
 		{
 			Matrix4 result;
 			CreateScale(vector, result);
 			return result;
 		}
-		void Matrix4::CreateScale(Vector3 vector, Matrix4& result)
+		void Matrix4::CreateScale(const Vector3& vector, Matrix4& result)
 		{
 			result = Matrix4::Zero;
 			result.M11 = vector.X;
@@ -714,13 +714,13 @@ namespace CFH
 			result.M21 = -result.M12;
 		}
 
-		Matrix4 Matrix4::CreateFromAxisAngle(Vector3 axis, float angle)
+		Matrix4 Matrix4::CreateFromAxisAngle(const Vector3& axis, float angle)
 		{
 			Matrix4 result;
 			CreateFromAxisAngle(axis, angle, result);
 			return result;
 		}
-		void Matrix4::CreateFromAxisAngle(Vector3 axis, float angle, Matrix4& result)
+		void Matrix4::CreateFromAxisAngle(const Vector3& axis, float angle, Matrix4& result)
 		{
 			Vector3 temp = axis;
 			float length;
@@ -752,13 +752,13 @@ namespace CFH
 			result.M43 = 0;
 			result.M44 = 1;
 		}
-		Matrix4 Matrix4::CreateFromQuaternion(Quaternion quaternion)
+		Matrix4 Matrix4::CreateFromQuaternion(const Quaternion& quaternion)
 		{
 			Matrix4 result;
 			CreateFromQuaternion(quaternion, result);
 			return result;
 		}
-		void Matrix4::CreateFromQuaternion(Quaternion quaternion, Matrix4& result)
+		void Matrix4::CreateFromQuaternion(const Quaternion& quaternion, Matrix4& result)
 		{
 			result.M11 = (2 * quaternion.X * quaternion.X) + (2 * quaternion.W * quaternion.W) - 1;
 			result.M12 = (2 * quaternion.X * quaternion.Y) + (2 * quaternion.Z * quaternion.W);
@@ -791,13 +791,13 @@ namespace CFH
 			Matrix4::CreateFromQuaternion(Quaternion::CreateFromYawPitchRoll(yaw, pitch, roll), result);
 		}
 
-		Matrix4 Matrix4::CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUp)
+		Matrix4 Matrix4::CreateLookAt(const Vector3& cameraPosition, const Vector3& cameraTarget, const Vector3& cameraUp)
 		{
 			Matrix4 result;
 			CreateLookAt(cameraPosition, cameraTarget, cameraUp, result);
 			return result;
 		}
-		void Matrix4::CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUp, Matrix4& result)
+		void Matrix4::CreateLookAt(const Vector3& cameraPosition, const Vector3& cameraTarget, const Vector3& cameraUp, Matrix4& result)
 		{
 			Vector3 pos;
 			Vector3::Subtract(cameraPosition, cameraTarget, pos);
@@ -932,13 +932,13 @@ namespace CFH
 			result.M34 = -1;
 			result.M43 = nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 		}
-		Matrix4 Matrix4::CreateReflection(Plane plane)
+		Matrix4 Matrix4::CreateReflection(const Plane& plane)
 		{
 			Matrix4 result;
 			CreateReflection(plane, result);
 			return result;
 		}
-		void Matrix4::CreateReflection(Plane plane, Matrix4& result)
+		void Matrix4::CreateReflection(const Plane& plane, Matrix4& result)
 		{
 			result = Matrix4::Identity;
 
@@ -964,13 +964,13 @@ namespace CFH
 			result.M43 = -2 * temp.Normal.Z * temp.D;
 			result.M44 = 1;
 		}
-		Matrix4 Matrix4::CreateShadow(Vector3 lightDirection, Plane plane)
+		Matrix4 Matrix4::CreateShadow(const Vector3& lightDirection, const Plane& plane)
 		{
 			Matrix4 result;
 			CreateShadow(lightDirection, plane, result);
 			return result;
 		}
-		void Matrix4::CreateShadow(Vector3 lightDirection, Plane plane, Matrix4& result)
+		void Matrix4::CreateShadow(const Vector3& lightDirection, const Plane& plane, Matrix4& result)
 		{
 			Plane temp;
 			Plane::Normalize(plane, temp);
@@ -995,13 +995,13 @@ namespace CFH
 			result.M34 = 0;
 			result.M44 = dot;
 		}
-		Matrix4 Matrix4::CreateWorld(Vector3 position, Vector3 forward, Vector3 up)
+		Matrix4 Matrix4::CreateWorld(const Vector3& position, const Vector3& forward, const Vector3& up)
 		{
 			Matrix4 result;
 			CreateWorld(position, forward, up, result);
 			return result;
 		}
-		void Matrix4::CreateWorld(Vector3 position, Vector3 forward, Vector3 up, Matrix4& result)
+		void Matrix4::CreateWorld(const Vector3& position, const Vector3& forward, const Vector3& up, Matrix4& result)
 		{
 			Vector3 x, y, z;
 			Vector3::Cross(forward, up, x);
@@ -1051,13 +1051,13 @@ namespace CFH
 					M23 *(M31 * M42 - M41 * M32)
 					);
 		}
-		Matrix4 Matrix4::Invert(Matrix4 matrix)
+		Matrix4 Matrix4::Invert(const Matrix4& matrix)
 		{
 			Matrix4 result;
 			Invert(matrix, result);
 			return result;
 		}
-		void Matrix4::Invert(Matrix4 matrix, Matrix4& result)
+		void Matrix4::Invert(const Matrix4& matrix, Matrix4& result)
 		{
 			float determinant, minor1, minor2, minor3, minor4, minor5, minor6, minor7, minor8, minor9, minor10, minor11, minor12;
 			GetDeterminants(matrix, determinant, minor1, minor2, minor3, minor4, minor5, minor6, minor7, minor8, minor9, minor10, minor11, minor12);
@@ -1081,7 +1081,7 @@ namespace CFH
 			result.M43 = (-matrix.M41 * minor4 + matrix.M42 * minor2 - matrix.M43 * minor1) * oneOverDeterminant;
 			result.M44 = (matrix.M31 * minor4 - matrix.M32 * minor2 + matrix.M33 * minor1) * oneOverDeterminant;
 		}
-		void Matrix4::GetDeterminants(Matrix4 matrix, float& determinant, float& minor1, float& minor2, float& minor3, float& minor4, float& minor5,
+		void Matrix4::GetDeterminants(const Matrix4& matrix, float& determinant, float& minor1, float& minor2, float& minor3, float& minor4, float& minor5,
 			float& minor6, float& minor7, float& minor8, float& minor9, float& minor10, float& minor11, float& minor12)
 		{
 			minor1 = matrix.M11 * matrix.M22 - matrix.M12 * matrix.M21;
@@ -1100,13 +1100,13 @@ namespace CFH
 
 			determinant = minor1 * minor12 - minor2 * minor11 + minor3 * minor10 + minor4 * minor9 - minor5 * minor8 + minor6 * minor7;
 		}
-		Matrix4 Matrix4::Lerp(Matrix4 matrixA, Matrix4 matrixB, float amount)
+		Matrix4 Matrix4::Lerp(const Matrix4& matrixA, const Matrix4& matrixB, float amount)
 		{
 			Matrix4 result;
 			Lerp(matrixA, matrixB, amount, result);
 			return result;
 		}
-		void Matrix4::Lerp(Matrix4 matrixA, Matrix4 matrixB, float amount, Matrix4& result)
+		void Matrix4::Lerp(const Matrix4& matrixA, const Matrix4& matrixB, float amount, Matrix4& result)
 		{
 			result.M11 = matrixA.M11 + (matrixB.M11 - matrixA.M11) * amount;
 			result.M12 = matrixA.M12 + (matrixB.M12 - matrixA.M12) * amount;
@@ -1125,24 +1125,24 @@ namespace CFH
 			result.M43 = matrixA.M43 + (matrixB.M43 - matrixA.M43) * amount;
 			result.M44 = matrixA.M44 + (matrixB.M44 - matrixA.M44) * amount;
 		}
-		Matrix4 Matrix4::Transform(Matrix4 matrix, Quaternion rotation)
+		Matrix4 Matrix4::Transform(const Matrix4& matrix, const Quaternion& rotation)
 		{
 			Matrix4 result;
 			Transform(matrix, rotation, result);
 			return result;
 		}
-		void Matrix4::Transform(Matrix4 matrix, Quaternion rotation, Matrix4& result)
+		void Matrix4::Transform(const Matrix4& matrix, const Quaternion& rotation, Matrix4& result)
 		{
 			CreateFromQuaternion(rotation, result);
 			Multiply(matrix, result, result);
 		}
-		Matrix4 Matrix4::Transpose(Matrix4 matrix)
+		Matrix4 Matrix4::Transpose(const Matrix4& matrix)
 		{
 			Matrix4 result;
 			Transpose(matrix, result);
 			return result;
 		}
-		void Matrix4::Transpose(Matrix4 matrix, Matrix4& result)
+		void Matrix4::Transpose(const Matrix4& matrix, Matrix4& result)
 		{
 			result = Matrix4::Zero;
 			result.M11 = matrix.M11;

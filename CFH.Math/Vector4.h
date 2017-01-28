@@ -24,69 +24,69 @@ namespace CFH
 
 			Vector4();
 			Vector4(float value);
-			Vector4(Vector2 vector, float z, float w);
-			Vector4(Vector3 vector, float w);
+			Vector4(const Vector2& vector, float z, float w);
+			Vector4(const Vector3& vector, float w);
 			Vector4(float x, float y, float z, float w);
 			Vector4(std::initializer_list<float>);
 			~Vector4();
 
-			Vector4 operator+(Vector4 vector) const;
-			Vector4 operator-(Vector4 vector) const;
+			Vector4 operator+(const Vector4& vector) const;
+			Vector4 operator-(const Vector4& vector) const;
 			Vector4 operator-() const;
-			Vector4 operator*(Vector4 vector) const;
+			Vector4 operator*(const Vector4& vector) const;
 			Vector4 operator*(float value) const;
-			Vector4 operator/(Vector4 vector) const;
+			Vector4 operator/(const Vector4& vector) const;
 			Vector4 operator/(float value) const;
-			Vector4 operator+=(Vector4 vector);
-			Vector4 operator-=(Vector4 vector);
-			Vector4 operator*=(Vector4 vector);
-			Vector4 operator*=(float value);
-			Vector4 operator/=(Vector4 vector);
-			Vector4 operator/=(float value);
-			bool operator==(Vector4 vector) const;
-			bool operator!=(Vector4 vector) const;
-			Vector4 operator=(Vector4 vector);
+			const Vector4& operator+=(const Vector4& vector);
+			const Vector4& operator-=(const Vector4& vector);
+			const Vector4& operator*=(const Vector4& vector);
+			const Vector4& operator*=(float value);
+			const Vector4& operator/=(const Vector4& vector);
+			const Vector4& operator/=(float value);
+			bool operator==(const Vector4& vector) const;
+			bool operator!=(const Vector4& vector) const;
+			const Vector4& operator=(const Vector4& vector);
 
-			static Vector4 Add(Vector4 lhs, Vector4 rhs);
-			static void Add(Vector4 lhs, Vector4 rhs, Vector4& result);
-			static Vector4 Subtract(Vector4 lhs, Vector4 rhs);
-			static void Subtract(Vector4 lhs, Vector4 rhs, Vector4& result);
-			static Vector4 Multiply(Vector4 lhs, Vector4 rhs);
-			static void Multiply(Vector4 lhs, Vector4 rhs, Vector4& result);
-			static Vector4 Multiply(Vector4 vector, float value);
-			static void Multiply(Vector4 vector, float value, Vector4& result);
-			static Vector4 Divide(Vector4 lhs, Vector4 rhs);
-			static void Divide(Vector4 lhs, Vector4 rhs, Vector4& result);
-			static Vector4 Divide(Vector4 vector, float value);
-			static void Divide(Vector4 vector, float value, Vector4& result);
-			static Vector4 Negate(Vector4 vector);
-			static void Negate(Vector4 vector, Vector4& result);
+			static Vector4 Add(const Vector4& lhs, const Vector4& rhs);
+			static void Add(const Vector4& lhs, const Vector4& rhs, Vector4& result);
+			static Vector4 Subtract(const Vector4& lhs, const Vector4& rhs);
+			static void Subtract(const Vector4& lhs, const Vector4& rhs, Vector4& result);
+			static Vector4 Multiply(const Vector4& lhs, const Vector4& rhs);
+			static void Multiply(const Vector4& lhs, const Vector4& rhs, Vector4& result);
+			static Vector4 Multiply(const Vector4& vector, float value);
+			static void Multiply(const Vector4& vector, float value, Vector4& result);
+			static Vector4 Divide(const Vector4& lhs, const Vector4& rhs);
+			static void Divide(const Vector4& lhs, const Vector4& rhs, Vector4& result);
+			static Vector4 Divide(const Vector4& vector, float value);
+			static void Divide(const Vector4& vector, float value, Vector4& result);
+			static Vector4 Negate(const Vector4& vector);
+			static void Negate(const Vector4& vector, Vector4& result);
 
 			float Length() const;
 			void Length(float& result) const;
-			static float Length(Vector4 vector);
-			static void Length(Vector4 vector, float& result);
+			static float Length(const Vector4& vector);
+			static void Length(const Vector4& vector, float& result);
 			float LengthSquared() const;
 			void LengthSquared(float& result) const;
-			static float LengthSquared(Vector4 vector);
-			static void LengthSquared(Vector4 vector, float& result);
+			static float LengthSquared(const Vector4& vector);
+			static void LengthSquared(const Vector4& vector, float& result);
 
-			static float Distance(Vector4 lhs, Vector4 rhs);
-			static void Distance(Vector4 lhs, Vector4 rhs, float& result);
-			static float DistanceSquared(Vector4 lhs, Vector4 rhs);
-			static void DistanceSquared(Vector4 lhs, Vector4 rhs, float& result);
+			static float Distance(const Vector4& lhs, const Vector4& rhs);
+			static void Distance(const Vector4& lhs, const Vector4& rhs, float& result);
+			static float DistanceSquared(const Vector4& lhs, const Vector4& rhs);
+			static void DistanceSquared(const Vector4& lhs, const Vector4& rhs, float& result);
 
-			static float Dot(Vector4 lhs, Vector4 rhs);
-			static void Dot(Vector4 lhs, Vector4 rhs, float& result);
+			static float Dot(const Vector4& lhs, const Vector4& rhs);
+			static void Dot(const Vector4& lhs, const Vector4& rhs, float& result);
 
-			static Vector4 Clamp(Vector4 vector, Vector4 min, Vector4 max);
-			static void Clamp(Vector4 vector, Vector4 min, Vector4 max, Vector4& result);
+			static Vector4 Clamp(const Vector4& vector, const Vector4& min, const Vector4& max);
+			static void Clamp(const Vector4& vector, const Vector4& min, const Vector4& max, Vector4& result);
 			void Normalize();
-			static Vector4 Normalize(Vector4 vector);
-			static void Normalize(Vector4 vector, Vector4& result);
+			static Vector4 Normalize(const Vector4& vector);
+			static void Normalize(const Vector4& vector, Vector4& result);
 
-			static Vector4 Transform(Vector4 vector, Matrix4 matrix);
-			static void Transform(Vector4 vector, Matrix4 matrix, Vector4& result);
+			static Vector4 Transform(const Vector4& vector, const Matrix4& matrix);
+			static void Transform(const Vector4& vector, const Matrix4& matrix, Vector4& result);
 		};
 	}
 }

@@ -30,36 +30,36 @@ namespace CFH
 			BoundingBox(Vector3 min, Vector3 max);
 			~BoundingBox();
 
-			bool operator==(BoundingBox boundingBox);
-			bool operator!=(BoundingBox boundingBox);
-			BoundingBox operator=(BoundingBox boundingBox);
+			bool operator==(const BoundingBox& boundingBox);
+			bool operator!=(const BoundingBox& boundingBox);
+			const BoundingBox& operator=(const BoundingBox& boundingBox);
 
-			static BoundingBox CreateFromPoints(Vector3 points[], int count);
-			static void CreateFromPoints(Vector3 points[], int count, BoundingBox& result);
-			static BoundingBox CreateFromSphere(BoundingSphere boundingSphere);
-			static void CreateFromSphere(BoundingSphere boundingSphere, BoundingBox& result);
-			static BoundingBox CreateMerged(BoundingBox boundingBox, BoundingBox boundingBox2);
-			static void CreateMerged(BoundingBox boundingBox, BoundingBox boundingBox2, BoundingBox& result);
+			static BoundingBox CreateFromPoints(const Vector3 points[], int count);
+			static void CreateFromPoints(const Vector3 points[], int count, BoundingBox& result);
+			static BoundingBox CreateFromSphere(const BoundingSphere& boundingSphere);
+			static void CreateFromSphere(const BoundingSphere& boundingSphere, BoundingBox& result);
+			static BoundingBox CreateMerged(const BoundingBox& boundingBox, const BoundingBox& boundingBox2);
+			static void CreateMerged(const BoundingBox& boundingBox, const BoundingBox& boundingBox2, BoundingBox& result);
 
-			ContainmentType Contains(Vector3 point) const;
-			void Contains(Vector3 point, ContainmentType& result) const;
-			ContainmentType Contains(BoundingBox boundingBox) const;
-			void Contains(BoundingBox boundingBox, ContainmentType& result) const;
-			ContainmentType Contains(BoundingFrustum boundingFrustum) const;
-			void Contains(BoundingFrustum boundingFrustum, ContainmentType& result) const;
-			ContainmentType Contains(BoundingSphere boundingSphere) const;
-			void Contains(BoundingSphere boundingSphere, ContainmentType& result) const;
+			ContainmentType Contains(const Vector3& point) const;
+			void Contains(const Vector3& point, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingBox& boundingBox) const;
+			void Contains(const BoundingBox& boundingBox, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingFrustum& boundingFrustum) const;
+			void Contains(const BoundingFrustum& boundingFrustum, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingSphere& boundingSphere) const;
+			void Contains(const BoundingSphere& boundingSphere, ContainmentType& result) const;
 
-			bool Intersects(BoundingBox boundingBox) const;
-			void Intersects(BoundingBox boundingBox, bool& result) const;
-			bool Intersects(BoundingFrustum boundingFrustum) const;
-			void Intersects(BoundingFrustum boundingFrustum, bool& result) const;
-			bool Intersects(BoundingSphere boundingSphere) const;
-			void Intersects(BoundingSphere boundingSphere, bool& result) const;
-			PlaneIntersectionType Intersects(Plane plane) const;
-			void Intersects(Plane plane, PlaneIntersectionType& result) const;
-			bool Intersects(Ray ray, float& distance) const;
-			void Intersects(Ray ray, float& distance, bool& result) const;
+			bool Intersects(const BoundingBox& boundingBox) const;
+			void Intersects(const BoundingBox& boundingBox, bool& result) const;
+			bool Intersects(const BoundingFrustum& boundingFrustum) const;
+			void Intersects(const BoundingFrustum& boundingFrustum, bool& result) const;
+			bool Intersects(const BoundingSphere& boundingSphere) const;
+			void Intersects(const BoundingSphere& boundingSphere, bool& result) const;
+			PlaneIntersectionType Intersects(const Plane& plane) const;
+			void Intersects(const Plane& plane, PlaneIntersectionType& result) const;
+			bool Intersects(const Ray& ray, float& distance) const;
+			void Intersects(const Ray& ray, float& distance, bool& result) const;
 
 			void GetCorners(Vector3* corners) const;
 			Vector3 GetCorner(int index) const;

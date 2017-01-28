@@ -31,43 +31,43 @@ namespace CFH
 			Matrix4(std::initializer_list<float>);
 			~Matrix4();
 
-			Matrix4 operator+(Matrix4 matrix) const;
-			Matrix4 operator-(Matrix4 matrix) const;
-			Matrix4 operator*(Matrix4 matrix) const;
-			Matrix4 operator/(Matrix4 matrix) const;
-			Matrix4 operator+=(Matrix4 matrix);
-			Matrix4 operator-=(Matrix4 matrix);
-			Matrix4 operator*=(Matrix4 matrix);
-			Matrix4 operator/=(Matrix4 matrix);
-			bool operator==(Matrix4 matrix) const;
-			bool operator!=(Matrix4 matrix) const;
-			Matrix4 operator=(Matrix4 matrix);
+			Matrix4 operator+(const Matrix4& matrix) const;
+			Matrix4 operator-(const Matrix4& matrix) const;
+			Matrix4 operator*(const Matrix4& matrix) const;
+			Matrix4 operator/(const Matrix4& matrix) const;
+			const Matrix4& operator+=(const Matrix4& matrix);
+			const Matrix4& operator-=(const Matrix4& matrix);
+			const Matrix4& operator*=(const Matrix4& matrix);
+			const Matrix4& operator/=(const Matrix4& matrix);
+			bool operator==(const Matrix4& matrix) const;
+			bool operator!=(const Matrix4& matrix) const;
+			const Matrix4& operator=(const Matrix4& matrix);
 			float& operator[](int index);
 			float operator[](int index) const;
 
-			static Matrix4 Add(Matrix4 lhs, Matrix4 rhs);
-			static void Add(Matrix4 lhs, Matrix4 rhs, Matrix4& result);
-			static Matrix4 Subtract(Matrix4 lhs, Matrix4 rhs);
-			static void Subtract(Matrix4 lhs, Matrix4 rhs, Matrix4& result);
-			static Matrix4 Multiply(Matrix4 lhs, Matrix4 rhs);
-			static void Multiply(Matrix4 lhs, Matrix4 rhs, Matrix4& result);
-			static Matrix4 Multiply(Matrix4 vector, float value);
-			static void Multiply(Matrix4 vector, float value, Matrix4& result);
-			static Matrix4 Divide(Matrix4 lhs, Matrix4 rhs);
-			static void Divide(Matrix4 lhs, Matrix4 rhs, Matrix4& result);
-			static Matrix4 Divide(Matrix4 vector, float value);
-			static void Divide(Matrix4 vector, float value, Matrix4& result);
-			static Matrix4 Negate(Matrix4 vector);
-			static void Negate(Matrix4 vector, Matrix4& result);
+			static Matrix4 Add(const Matrix4& lhs, const Matrix4& rhs);
+			static void Add(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result);
+			static Matrix4 Subtract(const Matrix4& lhs, const Matrix4& rhs);
+			static void Subtract(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result);
+			static Matrix4 Multiply(const Matrix4& lhs, const Matrix4& rhs);
+			static void Multiply(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result);
+			static Matrix4 Multiply(const Matrix4& vector, float value);
+			static void Multiply(const Matrix4& vector, float value, Matrix4& result);
+			static Matrix4 Divide(const Matrix4& lhs, const Matrix4& rhs);
+			static void Divide(const Matrix4& lhs, const Matrix4& rhs, Matrix4& result);
+			static Matrix4 Divide(const Matrix4& vector, float value);
+			static void Divide(const Matrix4& vector, float value, Matrix4& result);
+			static Matrix4 Negate(const Matrix4& vector);
+			static void Negate(const Matrix4& vector, Matrix4& result);
 
-			void SetForward(Vector3 vector);
-			void SetBackward(Vector3 vector);
-			void SetUp(Vector3 vector);
-			void SetDown(Vector3 vector);
-			void SetRight(Vector3 vector);
-			void SetLeft(Vector3 vector);
-			void SetTranslation(Vector3 vector);
-			void SetScale(Vector3 scale);
+			void SetForward(const Vector3& vector);
+			void SetBackward(const Vector3& vector);
+			void SetUp(const Vector3& vector);
+			void SetDown(const Vector3& vector);
+			void SetRight(const Vector3& vector);
+			void SetLeft(const Vector3& vector);
+			void SetTranslation(const Vector3& vector);
+			void SetScale(const Vector3& scale);
 			void SetScale(float value);
 			void SetScaleX(float value);
 			void SetScaleY(float value);
@@ -98,13 +98,13 @@ namespace CFH
 
 			bool Decompose(Vector3& scale, Quaternion& rotation, Vector3& translation);
 
-			static Matrix4 CreateTranslation(Vector3 vector);
-			static void CreateTranslation(Vector3 vector, Matrix4& result);
+			static Matrix4 CreateTranslation(const Vector3& vector);
+			static void CreateTranslation(const Vector3& vector, Matrix4& result);
 
 			static Matrix4 CreateScale(float scale);
 			static void CreateScale(float scale, Matrix4& result);
-			static Matrix4 CreateScale(Vector3 scale);
-			static void CreateScale(Vector3 scale, Matrix4& result);
+			static Matrix4 CreateScale(const Vector3& scale);
+			static void CreateScale(const Vector3& scale, Matrix4& result);
 
 			static Matrix4 CreateRotationX(float radians);
 			static void CreateRotationX(float radians, Matrix4& result);
@@ -113,20 +113,20 @@ namespace CFH
 			static Matrix4 CreateRotationZ(float radians);
 			static void CreateRotationZ(float radians, Matrix4& result);
 
-			static Matrix4 CreateBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUp, Vector3 cameraForward);
-			static void CreateBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUp, Vector3 cameraForward, Matrix4& result);
-			static Matrix4 CreateConstrainedBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 rotateAxis, Vector3 objectForward, Vector3 cameraForward);
-			static void CreateConstrainedBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 rotateAxis, Vector3 objectForward, Vector3 cameraForward, Matrix4& result);
+			static Matrix4 CreateBillboard(const Vector3& objectPosition, const Vector3& cameraPosition, const Vector3& cameraUp, const Vector3& cameraForward);
+			static void CreateBillboard(const Vector3& objectPosition, const Vector3& cameraPosition, const Vector3& cameraUp, const Vector3& cameraForward, Matrix4& result);
+			static Matrix4 CreateConstrainedBillboard(const Vector3& objectPosition, const Vector3& cameraPosition, const Vector3& rotateAxis, const Vector3& objectForward, const Vector3& cameraForward);
+			static void CreateConstrainedBillboard(const Vector3& objectPosition, const Vector3& cameraPosition, const Vector3& rotateAxis, const Vector3& objectForward, const Vector3& cameraForward, Matrix4& result);
 
-			static Matrix4 CreateFromAxisAngle(Vector3 axis, float angle);
-			static void CreateFromAxisAngle(Vector3 axis, float angle, Matrix4& result);
-			static Matrix4 CreateFromQuaternion(Quaternion quaternion);
-			static void CreateFromQuaternion(Quaternion quaternion, Matrix4& result);
+			static Matrix4 CreateFromAxisAngle(const Vector3& axis, float angle);
+			static void CreateFromAxisAngle(const Vector3& axis, float angle, Matrix4& result);
+			static Matrix4 CreateFromQuaternion(const Quaternion& quaternion);
+			static void CreateFromQuaternion(const Quaternion& quaternion, Matrix4& result);
 			static Matrix4 CreateFromYawPitchRoll(float yaw, float pitch, float roll);
 			static void CreateFromYawPitchRoll(float yaw, float pitch, float roll, Matrix4& result);
 
-			static Matrix4 CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUp);
-			static void CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUp, Matrix4& result);
+			static Matrix4 CreateLookAt(const Vector3& cameraPosition, const Vector3& cameraTarget, const Vector3& cameraUp);
+			static void CreateLookAt(const Vector3& cameraPosition, const Vector3& cameraTarget, const Vector3& cameraUp, Matrix4& result);
 			static Matrix4 CreateOrthographic(float width, float height, float nearPlaneDistance, float farPlaneDistance);
 			static void CreateOrthographic(float width, float height, float nearPlaneDistance, float farPlaneDistance, Matrix4& result);
 			static Matrix4 CreateOrthographicOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance);
@@ -137,28 +137,28 @@ namespace CFH
 			static void CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance, Matrix4& result);
 			static Matrix4 CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance);
 			static void CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance, Matrix4& result);
-			static Matrix4 CreateReflection(Plane plane);
-			static void CreateReflection(Plane plane, Matrix4& result);
-			static Matrix4 CreateShadow(Vector3 lightDirection, Plane plane);
-			static void CreateShadow(Vector3 lightDirection, Plane plane, Matrix4& result);
-			static Matrix4 CreateWorld(Vector3 position, Vector3 forward, Vector3 up);
-			static void CreateWorld(Vector3 postion, Vector3 forward, Vector3 up, Matrix4& result);
+			static Matrix4 CreateReflection(const Plane& plane);
+			static void CreateReflection(const Plane& plane, Matrix4& result);
+			static Matrix4 CreateShadow(const Vector3& lightDirection, const Plane& plane);
+			static void CreateShadow(const Vector3& lightDirection, const Plane& plane, Matrix4& result);
+			static Matrix4 CreateWorld(const Vector3& position, const Vector3& forward, const Vector3& up);
+			static void CreateWorld(const Vector3& postion, const Vector3& forward, const Vector3& up, Matrix4& result);
 
 			float Determinant() const;
 			void Determinant(float& result) const;
-			static Matrix4 Invert(Matrix4 matrix);
-			static void Invert(Matrix4 matrix, Matrix4& result);
-			static Matrix4 Lerp(Matrix4 matrixA, Matrix4 matrixB, float amount);
-			static void Lerp(Matrix4 matrixA, Matrix4 matrixB, float amount, Matrix4& result);
-			static Matrix4 Transform(Matrix4 matrix, Quaternion rotation);
-			static void Transform(Matrix4 matrix, Quaternion rotation, Matrix4& result);
-			static Matrix4 Transpose(Matrix4 matrix);
-			static void Transpose(Matrix4 matrix, Matrix4& result);
+			static Matrix4 Invert(const Matrix4& matrix);
+			static void Invert(const Matrix4& matrix, Matrix4& result);
+			static Matrix4 Lerp(const Matrix4& matrixA, const Matrix4& matrixB, float amount);
+			static void Lerp(const Matrix4& matrixA, const Matrix4& matrixB, float amount, Matrix4& result);
+			static Matrix4 Transform(const Matrix4& matrix, const Quaternion& rotation);
+			static void Transform(const Matrix4& matrix, const Quaternion& rotation, Matrix4& result);
+			static Matrix4 Transpose(const Matrix4& matrix);
+			static void Transpose(const Matrix4& matrix, Matrix4& result);
 			Vector3 ToEular() const;
 			void ToEular(Vector3& result) const;
 
 		private:
-			static void GetDeterminants(Matrix4 matrix, float& determinant, float& minor1, float& minor2, float& minor3, float& minor4, float& minor5,
+			static void GetDeterminants(const Matrix4& matrix, float& determinant, float& minor1, float& minor2, float& minor3, float& minor4, float& minor5,
 				float& minor6, float& minor7, float& minor8, float& minor9, float& minor10, float& minor11, float& minor12);
 		};
 	}

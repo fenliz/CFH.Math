@@ -18,24 +18,24 @@ namespace CFH
 			Vector3 Direction;
 
 			Ray();
-			Ray(Vector3 position, Vector3 direction);
+			Ray(const Vector3& position, const Vector3&  direction);
 			~Ray();
 
-			bool operator==(Ray ray) const;
-			bool operator!=(Ray ray) const;
+			bool operator==(const Ray& ray) const;
+			bool operator!=(const Ray& ray) const;
 
-			bool Intersects(BoundingBox boundingBox) const;
-			bool Intersects(BoundingBox boundingBox, float& distance) const;
-			bool Intersects(BoundingBox boundingBox, Vector3& point) const;
-			bool Intersects(BoundingFrustum boundingFrustum) const;
-			bool Intersects(BoundingFrustum boundingFrustum, float& distance) const;
-			bool Intersects(BoundingFrustum boundingFrustum, Vector3& point) const;
-			bool Intersects(BoundingSphere boundingSphere) const;
-			bool Intersects(BoundingSphere boundingSphere, float& distance) const;
-			bool Intersects(BoundingSphere boundingSphere, Vector3& point) const;
-			bool Intersects(Plane plane) const;
-			bool Intersects(Plane plane, float& distance) const;
-			bool Intersects(Plane plane, Vector3& point) const;
+			bool Intersects(const BoundingBox& boundingBox) const;
+			bool Intersects(const BoundingBox& boundingBox, float& distance) const;
+			bool Intersects(const BoundingBox& boundingBox, Vector3& point) const;
+			bool Intersects(const BoundingFrustum& boundingFrustum) const;
+			bool Intersects(const BoundingFrustum& boundingFrustum, float& distance) const;
+			bool Intersects(const BoundingFrustum& boundingFrustum, Vector3& point) const;
+			bool Intersects(const BoundingSphere& boundingSphere) const;
+			bool Intersects(const BoundingSphere& boundingSphere, float& distance) const;
+			bool Intersects(const BoundingSphere& boundingSphere, Vector3& point) const;
+			bool Intersects(const Plane& plane) const;
+			bool Intersects(const Plane& plane, float& distance) const;
+			bool Intersects(const Plane& plane, Vector3& point) const;
 		};
 	}
 }

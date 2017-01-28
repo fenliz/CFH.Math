@@ -33,7 +33,7 @@ namespace CFH
 			Z(value)
 		{
 		}
-		Vector3::Vector3(Vector2 vector, float z) :
+		Vector3::Vector3(const Vector2& vector, float z) :
 			X(vector.X),
 			Y(vector.Y),
 			Z(z)
@@ -56,11 +56,11 @@ namespace CFH
 		{
 		}
 
-		Vector3 Vector3::operator+(Vector3 vector) const
+		Vector3 Vector3::operator+(const Vector3& vector) const
 		{
 			return Vector3(X + vector.X, Y + vector.Y, Z + vector.Z);
 		}
-		Vector3 Vector3::operator-(Vector3 vector) const
+		Vector3 Vector3::operator-(const Vector3& vector) const
 		{
 			return Vector3(X - vector.X, Y - vector.Y, Z - vector.Z);
 		}
@@ -68,7 +68,7 @@ namespace CFH
 		{
 			return Vector3(-X, -Y, -Z);
 		}
-		Vector3 Vector3::operator*(Vector3 vector) const
+		Vector3 Vector3::operator*(const Vector3& vector) const
 		{
 			return Vector3(X * vector.X, Y * vector.Y, Z * vector.Z);
 		}
@@ -76,11 +76,11 @@ namespace CFH
 		{
 			return Vector3(X * value, Y * value, Z * value);
 		}
-		Vector3 operator*(float value, Vector3 v)
+		Vector3 operator*(float value, const Vector3& v)
 		{
 			return v * value;
 		}
-		Vector3 Vector3::operator/(Vector3 vector) const
+		Vector3 Vector3::operator/(const Vector3& vector) const
 		{
 			return Vector3(X / vector.X, Y / vector.Y, Z / vector.Z);
 		}
@@ -88,57 +88,57 @@ namespace CFH
 		{
 			return Vector3(X / value, Y / value, Z / value);
 		}
-		Vector3 Vector3::operator+=(Vector3 vector)
+		const Vector3& Vector3::operator+=(const Vector3& vector)
 		{
 			X += vector.X;
 			Y += vector.Y;
 			Z += vector.Z;
 			return *this;
 		}
-		Vector3 Vector3::operator-=(Vector3 vector)
+		const Vector3& Vector3::operator-=(const Vector3& vector)
 		{
 			X -= vector.X;
 			Y -= vector.Y;
 			Z -= vector.Z;
 			return *this;
 		}
-		Vector3 Vector3::operator*=(Vector3 vector)
+		const Vector3& Vector3::operator*=(const Vector3& vector)
 		{
 			X *= vector.X;
 			Y *= vector.Y;
 			Z *= vector.Z;
 			return *this;
 		}
-		Vector3 Vector3::operator*=(float value)
+		const Vector3& Vector3::operator*=(float value)
 		{
 			X *= value;
 			Y *= value;
 			Z *= value;
 			return *this;
 		}
-		Vector3 Vector3::operator/=(Vector3 vector)
+		const Vector3& Vector3::operator/=(const Vector3& vector)
 		{
 			X /= vector.X;
 			Y /= vector.Y;
 			Z /= vector.Z;
 			return *this;
 		}
-		Vector3 Vector3::operator/=(float value)
+		const Vector3& Vector3::operator/=(float value)
 		{
 			X /= value;
 			Y /= value;
 			Z /= value;
 			return *this;
 		}
-		bool Vector3::operator==(Vector3 vector) const
+		bool Vector3::operator==(const Vector3& vector) const
 		{
 			return (X == vector.X && Y == vector.Y && Z == vector.Z);
 		}
-		bool Vector3::operator!=(Vector3 vector) const
+		bool Vector3::operator!=(const Vector3& vector) const
 		{
 			return (X != vector.X || Y != vector.Y || Z != vector.Z);
 		}
-		Vector3 Vector3::operator=(Vector3 vector)
+		const Vector3& Vector3::operator=(const Vector3& vector)
 		{
 			X = vector.X;
 			Y = vector.Y;
@@ -146,85 +146,85 @@ namespace CFH
 			return *this;
 		}
 
-		Vector3 Vector3::Add(Vector3 lhs, Vector3 rhs)
+		Vector3 Vector3::Add(const Vector3& lhs, const Vector3& rhs)
 		{
 			Vector3 result;
 			Add(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Add(Vector3 lhs, Vector3 rhs, Vector3& result)
+		void Vector3::Add(const Vector3& lhs, const Vector3& rhs, Vector3& result)
 		{
 			result.X = lhs.X + rhs.X;
 			result.Y = lhs.Y + rhs.Y;
 			result.Z = lhs.Z + rhs.Z;
 		}
-		Vector3 Vector3::Subtract(Vector3 lhs, Vector3 rhs)
+		Vector3 Vector3::Subtract(const Vector3& lhs, const Vector3& rhs)
 		{
 			Vector3 result;
 			Subtract(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Subtract(Vector3 lhs, Vector3 rhs, Vector3& result)
+		void Vector3::Subtract(const Vector3& lhs, const Vector3& rhs, Vector3& result)
 		{
 			result.X = lhs.X - rhs.X;
 			result.Y = lhs.Y - rhs.Y;
 			result.Z = lhs.Z - rhs.Z;
 		}
-		Vector3 Vector3::Multiply(Vector3 lhs, Vector3 rhs)
+		Vector3 Vector3::Multiply(const Vector3& lhs, const Vector3& rhs)
 		{
 			Vector3 result;
 			Multiply(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Multiply(Vector3 lhs, Vector3 rhs, Vector3& result)
+		void Vector3::Multiply(const Vector3& lhs, const Vector3& rhs, Vector3& result)
 		{
 			result.X = lhs.X * rhs.X;
 			result.Y = lhs.Y * rhs.Y;
 			result.Z = lhs.Z * rhs.Z;
 		}
-		Vector3 Vector3::Multiply(Vector3 vector, float value)
+		Vector3 Vector3::Multiply(const Vector3& vector, float value)
 		{
 			Vector3 result;
 			Multiply(vector, value, result);
 			return result;
 		}
-		void Vector3::Multiply(Vector3 vector, float value, Vector3& result)
+		void Vector3::Multiply(const Vector3& vector, float value, Vector3& result)
 		{
 			result.X = vector.X * value;
 			result.Y = vector.Y * value;
 			result.Z = vector.Z * value;
 		}
-		Vector3 Vector3::Divide(Vector3 lhs, Vector3 rhs)
+		Vector3 Vector3::Divide(const Vector3& lhs, const Vector3& rhs)
 		{
 			Vector3 result;
 			Divide(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Divide(Vector3 lhs, Vector3 rhs, Vector3& result)
+		void Vector3::Divide(const Vector3& lhs, const Vector3& rhs, Vector3& result)
 		{
 			result.X = lhs.X / rhs.X;
 			result.Y = lhs.Y / rhs.Y;
 			result.Z = lhs.Z / rhs.Z;
 		}
-		Vector3 Vector3::Divide(Vector3 vector, float value)
+		Vector3 Vector3::Divide(const Vector3& vector, float value)
 		{
 			Vector3 result;
 			Divide(vector, value, result);
 			return result;
 		}
-		void Vector3::Divide(Vector3 vector, float value, Vector3& result)
+		void Vector3::Divide(const Vector3& vector, float value, Vector3& result)
 		{
 			result.X = vector.X / value;
 			result.Y = vector.Y / value;
 			result.Z = vector.Z / value;
 		}
-		Vector3 Vector3::Negate(Vector3 vector)
+		Vector3 Vector3::Negate(const Vector3& vector)
 		{
 			Vector3 result;
 			Negate(vector, result);
 			return result;
 		}
-		void Vector3::Negate(Vector3 vector, Vector3& result)
+		void Vector3::Negate(const Vector3& vector, Vector3& result)
 		{
 			result.X = -vector.X;
 			result.Y = -vector.Y;
@@ -241,13 +241,13 @@ namespace CFH
 		{
 			Length(*this, result);
 		}
-		float Vector3::Length(Vector3 vector)
+		float Vector3::Length(const Vector3& vector)
 		{
 			float result;
 			Length(vector, result);
 			return result;
 		}
-		void Vector3::Length(Vector3 vector, float& result)
+		void Vector3::Length(const Vector3& vector, float& result)
 		{
 			LengthSquared(vector, result);
 			result = MathHelper::Sqrt(result);
@@ -263,36 +263,36 @@ namespace CFH
 		{
 			LengthSquared(*this, result);
 		}
-		float Vector3::LengthSquared(Vector3 vector)
+		float Vector3::LengthSquared(const Vector3& vector)
 		{
 			float result;
 			LengthSquared(vector, result);
 			return result;
 		}
-		void Vector3::LengthSquared(Vector3 vector, float& result)
+		void Vector3::LengthSquared(const Vector3& vector, float& result)
 		{
 			result = (vector.X * vector.X) + (vector.Y * vector.Y) +
 				(vector.Z * vector.Z);
 		}
 
-		float Vector3::Distance(Vector3 lhs, Vector3 rhs)
+		float Vector3::Distance(const Vector3& lhs, const Vector3& rhs)
 		{
 			float result;
 			Distance(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Distance(Vector3 lhs, Vector3 rhs, float& result)
+		void Vector3::Distance(const Vector3& lhs, const Vector3& rhs, float& result)
 		{
 			DistanceSquared(lhs, rhs, result);
 			result = MathHelper::Sqrt(result);
 		}
-		float Vector3::DistanceSquared(Vector3 lhs, Vector3 rhs)
+		float Vector3::DistanceSquared(const Vector3& lhs, const Vector3& rhs)
 		{
 			float result;
 			DistanceSquared(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::DistanceSquared(Vector3 lhs, Vector3 rhs, float& result)
+		void Vector3::DistanceSquared(const Vector3& lhs, const Vector3& rhs, float& result)
 		{
 			float deltaX, deltaY, deltaZ;
 			deltaX = rhs.X - lhs.X;
@@ -302,38 +302,38 @@ namespace CFH
 				(deltaZ * deltaZ);
 		}
 
-		float Vector3::Dot(Vector3 lhs, Vector3 rhs)
+		float Vector3::Dot(const Vector3& lhs, const Vector3& rhs)
 		{
 			float result;
 			Dot(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Dot(Vector3 lhs, Vector3 rhs, float& result)
+		void Vector3::Dot(const Vector3& lhs, const Vector3& rhs, float& result)
 		{
 			result = (lhs.X * rhs.X) + (lhs.Y * rhs.Y) +
 				(lhs.Z * rhs.Z);
 		}
 
-		Vector3 Vector3::Cross(Vector3 lhs, Vector3 rhs)
+		Vector3 Vector3::Cross(const Vector3& lhs, const Vector3& rhs)
 		{
 			Vector3 result;
 			Cross(lhs, rhs, result);
 			return result;
 		}
-		void Vector3::Cross(Vector3 lhs, Vector3 rhs, Vector3& result)
+		void Vector3::Cross(const Vector3& lhs, const Vector3& rhs, Vector3& result)
 		{
 			result.X = (lhs.Y * rhs.Z) - (lhs.Z * rhs.Y);
 			result.Y = (lhs.Z * rhs.X) - (lhs.X * rhs.Z);
 			result.Z = (lhs.X * rhs.Y) - (lhs.Y * rhs.X);
 		}
 
-		Vector3 Vector3::Clamp(Vector3 value, Vector3 min, Vector3 max)
+		Vector3 Vector3::Clamp(const Vector3& value, const Vector3& min, const Vector3& max)
 		{
 			Vector3 result;
 			Clamp(value, min, max, result);
 			return result;
 		}
-		void Vector3::Clamp(Vector3 value, Vector3 min, Vector3 max, Vector3& result)
+		void Vector3::Clamp(const Vector3& value, const Vector3& min, const Vector3& max, Vector3& result)
 		{
 			MathHelper::Clamp(value.X, min.X, max.X, result.X);
 			MathHelper::Clamp(value.Y, min.Y, max.Y, result.Y);
@@ -347,13 +347,13 @@ namespace CFH
 			Y /= length;
 			Z /= length;
 		}
-		Vector3 Vector3::Normalize(Vector3 vector)
+		Vector3 Vector3::Normalize(const Vector3& vector)
 		{
 			Vector3 result;
 			Normalize(vector, result);
 			return result;
 		}
-		void Vector3::Normalize(Vector3 vector, Vector3& result)
+		void Vector3::Normalize(const Vector3& vector, Vector3& result)
 		{
 			float length = Length(vector);
 			result.X = vector.X / length;
@@ -361,13 +361,13 @@ namespace CFH
 			result.Z = vector.Z / length;
 		}
 
-		Vector3 Vector3::Transform(Vector3 vector, Matrix4 matrix)
+		Vector3 Vector3::Transform(const Vector3& vector, const Matrix4& matrix)
 		{
 			Vector3 result;
 			Transform(vector, matrix, result);
 			return result;
 		}
-		void Vector3::Transform(Vector3 vector, Matrix4 matrix, Vector3& result)
+		void Vector3::Transform(const Vector3& vector, const Matrix4& matrix, Vector3& result)
 		{
 			Vector3 v;
 			Vector4::Dot(Vector4(vector.X, vector.Y, vector.Z, 1), Vector4(matrix.M11, matrix.M21, matrix.M31, matrix.M41), v.X);
@@ -375,13 +375,13 @@ namespace CFH
 			Vector4::Dot(Vector4(vector.X, vector.Y, vector.Z, 1), Vector4(matrix.M13, matrix.M23, matrix.M33, matrix.M43), v.Z);
 			result = v;
 		}
-		Vector3 Vector3::Transform(Vector3 vector, Quaternion rotation)
+		Vector3 Vector3::Transform(const Vector3& vector, const Quaternion& rotation)
 		{
 			Vector3 result;
 			Transform(vector, rotation, result);
 			return result;
 		}
-		void Vector3::Transform(Vector3 vector, Quaternion rotation, Vector3& result)
+		void Vector3::Transform(const Vector3& vector, const Quaternion& rotation, Vector3& result)
 		{
 			Vector3 u = Vector3(rotation.X, rotation.Y, rotation.Z);
 			float s = rotation.W;
@@ -390,13 +390,13 @@ namespace CFH
 				+ (s * s - Vector3::Dot(u, u)) * vector
 				+ 2.0f * s * Vector3::Cross(u, vector);
 		}
-		Vector3 Vector3::TransformNormal(Vector3 normal, Matrix4 matrix)
+		Vector3 Vector3::TransformNormal(const Vector3& normal, const Matrix4& matrix)
 		{
 			Vector3 result;
 			TransformNormal(normal, matrix, result);
 			return result;
 		}
-		void Vector3::TransformNormal(Vector3 vector, Matrix4 matrix, Vector3& result)
+		void Vector3::TransformNormal(const Vector3& vector, const Matrix4& matrix, Vector3& result)
 		{
 			Vector4::Dot(Vector4(vector.X, vector.Y, vector.Z, 1), Vector4(matrix.M11, matrix.M21, matrix.M31, 0), result.X);
 			Vector4::Dot(Vector4(vector.X, vector.Y, vector.Z, 1), Vector4(matrix.M12, matrix.M22, matrix.M32, 0), result.Y);

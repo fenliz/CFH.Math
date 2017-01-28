@@ -28,56 +28,56 @@ namespace CFH
 			static const int Planes = 6;
 
 			BoundingFrustum();
-			BoundingFrustum(Matrix4 value);
+			BoundingFrustum(const Matrix4& value);
 			~BoundingFrustum();
 
-			bool operator==(BoundingFrustum boundingFrustum) const;
-			bool operator!=(BoundingFrustum boundingFrustum) const;
-			BoundingFrustum operator=(BoundingFrustum boundingFrustum);
+			bool operator==(const BoundingFrustum& boundingFrustum) const;
+			bool operator!=(const BoundingFrustum& boundingFrustum) const;
+			const BoundingFrustum& operator=(const BoundingFrustum& boundingFrustum);
 
-			void SetViewProjection(Matrix4 matrix);
-			Matrix4 GetViewProjection() const;
+			void SetViewProjection(const Matrix4& matrix);
+			const Matrix4& GetViewProjection() const;
 			void GetViewProjection(Matrix4& result) const;
-			Matrix4 GetInverseViewProjection() const;
+			const Matrix4& GetInverseViewProjection() const;
 			void GetInverseViewProjection(Matrix4& result) const;
 
-			Plane GetTop() const;
+			const Plane& GetTop() const;
 			void GetTop(Plane& result) const;
-			Plane GetBottom() const;
+			const Plane& GetBottom() const;
 			void GetBottom(Plane& result) const;
-			Plane GetFar() const;
+			const Plane& GetFar() const;
 			void GetFar(Plane& result) const;
-			Plane GetNear() const;
+			const Plane& GetNear() const;
 			void GetNear(Plane& result) const;
-			Plane GetRight() const;
+			const Plane& GetRight() const;
 			void GetRight(Plane& result) const;
-			Plane GetLeft() const;
+			const Plane& GetLeft() const;
 			void GetLeft(Plane& result) const;
 			void GetCorners(Vector3* corners, int size) const;
-			Vector3 GetCorner(int index) const;
+			const Vector3& GetCorner(int index) const;
 			void GetCorner(int index, Vector3& result) const;
-			Plane GetPlane(int index) const;
+			const Plane& GetPlane(int index) const;
 			void GetPlane(int index, Plane& result) const;
 
-			ContainmentType Contains(Vector3 point) const;
-			void Contains(Vector3 point, ContainmentType& result) const;
-			ContainmentType Contains(BoundingBox boundingBox) const;
-			void Contains(BoundingBox boundingBox, ContainmentType& result) const;
-			ContainmentType Contains(BoundingFrustum boundingFrustum) const;
-			void Contains(BoundingFrustum boundingFrustum, ContainmentType& result) const;
-			ContainmentType Contains(BoundingSphere boundingSphere) const;
-			void Contains(BoundingSphere boundingSphere, ContainmentType& result) const;
+			ContainmentType Contains(const Vector3& point) const;
+			void Contains(const Vector3& point, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingBox& boundingBox) const;
+			void Contains(const BoundingBox& boundingBox, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingFrustum& boundingFrustum) const;
+			void Contains(const BoundingFrustum& boundingFrustum, ContainmentType& result) const;
+			ContainmentType Contains(const BoundingSphere& boundingSphere) const;
+			void Contains(const BoundingSphere& boundingSphere, ContainmentType& result) const;
 
-			bool Intersects(BoundingBox box) const;
-			void Intersects(BoundingBox box, bool& result) const;
-			bool Intersects(BoundingFrustum frustum) const;
-			void Intersects(BoundingFrustum frustum, bool& result) const;
-			bool Intersects(BoundingSphere sphere) const;
-			void Intersects(BoundingSphere sphere, bool& result) const;
-			PlaneIntersectionType Intersects(Plane plane) const;
-			void Intersects(Plane plane, PlaneIntersectionType& result) const;
-			bool Intersects(Ray ray, float& distance) const;
-			void Intersects(Ray ray, float& distance, bool& result) const;
+			bool Intersects(const BoundingBox& box) const;
+			void Intersects(const BoundingBox& box, bool& result) const;
+			bool Intersects(const BoundingFrustum& frustum) const;
+			void Intersects(const BoundingFrustum& frustum, bool& result) const;
+			bool Intersects(const BoundingSphere& sphere) const;
+			void Intersects(const BoundingSphere& sphere, bool& result) const;
+			PlaneIntersectionType Intersects(const Plane& plane) const;
+			void Intersects(const Plane& plane, PlaneIntersectionType& result) const;
+			bool Intersects(const Ray& ray, float& distance) const;
+			void Intersects(const Ray& ray, float& distance, bool& result) const;
 		};
 	}
 }

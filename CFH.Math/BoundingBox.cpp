@@ -26,28 +26,28 @@ namespace CFH
 		{
 		}
 
-		bool BoundingBox::operator==(BoundingBox boundingBox)
+		bool BoundingBox::operator==(const BoundingBox& boundingBox)
 		{
 			return Min == boundingBox.Min && Max == boundingBox.Max;
 		}
-		bool BoundingBox::operator!=(BoundingBox boundingBox)
+		bool BoundingBox::operator!=(const BoundingBox& boundingBox)
 		{
 			return Min != boundingBox.Min || Max != boundingBox.Max;
 		}
-		BoundingBox BoundingBox::operator=(BoundingBox boundingBox)
+		const BoundingBox& BoundingBox::operator=(const BoundingBox& boundingBox)
 		{
 			Min = boundingBox.Min;
 			Max = boundingBox.Max;
 			return *this;
 		}
 
-		BoundingBox BoundingBox::CreateFromPoints(Vector3 points[], int count)
+		BoundingBox BoundingBox::CreateFromPoints(const Vector3 points[], int count)
 		{
 			BoundingBox result;
 			CreateFromPoints(points, count, result);
 			return result;
 		}
-		void BoundingBox::CreateFromPoints(Vector3 points[], int count, BoundingBox& result)
+		void BoundingBox::CreateFromPoints(const Vector3 points[], int count, BoundingBox& result)
 		{
 			float minX, minY, minZ;
 			float maxX, maxY, maxZ;
@@ -78,13 +78,13 @@ namespace CFH
 			result.Max.Y = maxY;
 			result.Max.Z = maxZ;
 		}
-		BoundingBox BoundingBox::CreateFromSphere(BoundingSphere boundingSphere)
+		BoundingBox BoundingBox::CreateFromSphere(const BoundingSphere& boundingSphere)
 		{
 			BoundingBox result;
 			CreateFromSphere(boundingSphere, result);
 			return result;
 		}
-		void BoundingBox::CreateFromSphere(BoundingSphere boundingSphere, BoundingBox& result)
+		void BoundingBox::CreateFromSphere(const BoundingSphere& boundingSphere, BoundingBox& result)
 		{
 			result.Min = result.Max = boundingSphere.Center;
 			result.Min.X -= boundingSphere.Radius;
@@ -94,13 +94,13 @@ namespace CFH
 			result.Max.Y += boundingSphere.Radius;
 			result.Max.Z += boundingSphere.Radius;
 		}
-		BoundingBox BoundingBox::CreateMerged(BoundingBox boundingBox, BoundingBox boundingBox2)
+		BoundingBox BoundingBox::CreateMerged(const BoundingBox& boundingBox, const BoundingBox& boundingBox2)
 		{
 			BoundingBox result;
 			CreateMerged(boundingBox, boundingBox2, result);
 			return result;
 		}
-		void BoundingBox::CreateMerged(BoundingBox boundingBox, BoundingBox boundingBox2, BoundingBox& result)
+		void BoundingBox::CreateMerged(const BoundingBox& boundingBox, const BoundingBox& boundingBox2, BoundingBox& result)
 		{
 			MathHelper::Min(boundingBox.Min.X, boundingBox2.Min.X, result.Min.X);
 			MathHelper::Min(boundingBox.Min.Y, boundingBox2.Min.Y, result.Min.Y);
@@ -111,13 +111,13 @@ namespace CFH
 			MathHelper::Max(boundingBox.Max.Z, boundingBox2.Max.Z, result.Max.Z);
 		}
 
-		ContainmentType BoundingBox::Contains(BoundingBox boundingBox) const
+		ContainmentType BoundingBox::Contains(const BoundingBox& boundingBox) const
 		{
 			ContainmentType result;
 			Contains(boundingBox, result);
 			return result;
 		}
-		void BoundingBox::Contains(BoundingBox boundingBox, ContainmentType& result) const
+		void BoundingBox::Contains(const BoundingBox& boundingBox, ContainmentType& result) const
 		{
 			if ((Max.X < boundingBox.Min.X || Min.X > boundingBox.Max.X) ||
 				(Max.Y < boundingBox.Min.Y || Min.Y > boundingBox.Max.Y) ||
@@ -130,13 +130,13 @@ namespace CFH
 			else
 				result = ContainmentType::Intersects;
 		}
-		ContainmentType BoundingBox::Contains(BoundingFrustum boundingFrustum) const
+		ContainmentType BoundingBox::Contains(const BoundingFrustum& boundingFrustum) const
 		{
 			ContainmentType result;
 			Contains(boundingFrustum, result);
 			return result;
 		}
-		void BoundingBox::Contains(BoundingFrustum boundingFrustum, ContainmentType& result) const
+		void BoundingBox::Contains(const BoundingFrustum& boundingFrustum, ContainmentType& result) const
 		{
 			Vector3 v;
 			bool containsAll = true;
@@ -161,13 +161,13 @@ namespace CFH
 			if (result != ContainmentType::Disjoint)
 				result = ContainmentType::Intersects;
 		}
-		ContainmentType BoundingBox::Contains(BoundingSphere boundingSphere) const
+		ContainmentType BoundingBox::Contains(const BoundingSphere& boundingSphere) const
 		{
 			ContainmentType result;
 			Contains(boundingSphere, result);
 			return result;
 		}
-		void BoundingBox::Contains(BoundingSphere boundingSphere, ContainmentType& result) const
+		void BoundingBox::Contains(const BoundingSphere& boundingSphere, ContainmentType& result) const
 		{
 			Vector3 p;
 			Vector3::Clamp(boundingSphere.Center, Min, Max, p);
@@ -189,13 +189,13 @@ namespace CFH
 
 			result = ContainmentType::Intersects;
 		}
-		ContainmentType BoundingBox::Contains(Vector3 point) const
+		ContainmentType BoundingBox::Contains(const Vector3& point) const
 		{
 			ContainmentType result;
 			Contains(point, result);
 			return result;
 		}
-		void BoundingBox::Contains(Vector3 point, ContainmentType& result) const
+		void BoundingBox::Contains(const Vector3& point, ContainmentType& result) const
 		{
 			if (point.X > Max.X || point.Y > Max.Y || point.Z > Max.Z
 				|| point.X < Min.X || point.Y < Min.Y || point.Z < Min.Z)
@@ -204,53 +204,53 @@ namespace CFH
 				result = ContainmentType::Contains;
 		}
 
-		bool BoundingBox::Intersects(BoundingBox boundingBox) const
+		bool BoundingBox::Intersects(const BoundingBox& boundingBox) const
 		{
 			bool result;
 			Intersects(boundingBox, result);
 			return result;
 		}
-		void BoundingBox::Intersects(BoundingBox boundingBox, bool& result) const
+		void BoundingBox::Intersects(const BoundingBox& boundingBox, bool& result) const
 		{
 			result = Contains(boundingBox) != ContainmentType::Disjoint;
 		}
-		bool BoundingBox::Intersects(BoundingFrustum boundingFrustum) const
+		bool BoundingBox::Intersects(const BoundingFrustum& boundingFrustum) const
 		{
 			bool result;
 			Intersects(boundingFrustum, result);
 			return result;
 		}
-		void BoundingBox::Intersects(BoundingFrustum boundingFrustum, bool& result) const
+		void BoundingBox::Intersects(const BoundingFrustum& boundingFrustum, bool& result) const
 		{
 			result = Contains(boundingFrustum) != ContainmentType::Disjoint;
 		}
-		bool BoundingBox::Intersects(BoundingSphere boundingSphere) const
+		bool BoundingBox::Intersects(const BoundingSphere& boundingSphere) const
 		{
 			bool result;
 			Intersects(boundingSphere, result);
 			return result;
 		}
-		void BoundingBox::Intersects(BoundingSphere boundingSphere, bool& result) const
+		void BoundingBox::Intersects(const BoundingSphere& boundingSphere, bool& result) const
 		{
 			result = Contains(boundingSphere) != ContainmentType::Disjoint;
 		}
-		PlaneIntersectionType BoundingBox::Intersects(Plane plane) const
+		PlaneIntersectionType BoundingBox::Intersects(const Plane& plane) const
 		{
 			PlaneIntersectionType result;
 			Intersects(plane, result);
 			return result;
 		}
-		void BoundingBox::Intersects(Plane plane, PlaneIntersectionType& result) const
+		void BoundingBox::Intersects(const Plane& plane, PlaneIntersectionType& result) const
 		{
 			plane.Intersects(*this, result);
 		}
-		bool BoundingBox::Intersects(Ray ray, float& distance) const
+		bool BoundingBox::Intersects(const Ray& ray, float& distance) const
 		{
 			bool result;
 			Intersects(ray, distance, result);
 			return result;
 		}
-		void BoundingBox::Intersects(Ray ray, float& distance, bool& result) const
+		void BoundingBox::Intersects(const Ray& ray, float& distance, bool& result) const
 		{
 			result = ray.Intersects(*this, distance);
 		}

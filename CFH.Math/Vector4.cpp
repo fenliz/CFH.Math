@@ -29,14 +29,14 @@ namespace CFH
 			W(value)
 		{
 		}
-		Vector4::Vector4(Vector2 vector, float z, float w) :
+		Vector4::Vector4(const Vector2& vector, float z, float w) :
 			X(vector.X),
 			Y(vector.Y),
 			Z(z),
 			W(w)
 		{
 		}
-		Vector4::Vector4(Vector3 vector, float w) :
+		Vector4::Vector4(const Vector3& vector, float w) :
 			X(vector.X),
 			Y(vector.Y),
 			Z(vector.Z),
@@ -62,11 +62,11 @@ namespace CFH
 		{
 		}
 
-		Vector4 Vector4::operator+(Vector4 vector) const
+		Vector4 Vector4::operator+(const Vector4& vector) const
 		{
 			return Vector4(X + vector.X, Y + vector.Y, Z + vector.Z, W + vector.W);
 		}
-		Vector4 Vector4::operator-(Vector4 vector) const
+		Vector4 Vector4::operator-(const Vector4& vector) const
 		{
 			return Vector4(X - vector.X, Y - vector.Y, Z - vector.Z, W - vector.W);
 		}
@@ -74,7 +74,7 @@ namespace CFH
 		{
 			return Vector4(-X, -Y, -Z, -W);
 		}
-		Vector4 Vector4::operator*(Vector4 vector) const
+		Vector4 Vector4::operator*(const Vector4& vector) const
 		{
 			return Vector4(X * vector.X, Y * vector.Y, Z * vector.Z, W * vector.W);
 		}
@@ -82,7 +82,7 @@ namespace CFH
 		{
 			return Vector4(X * value, Y * value, Z * value, W * value);
 		}
-		Vector4 Vector4::operator/(Vector4 vector) const
+		Vector4 Vector4::operator/(const Vector4& vector) const
 		{
 			return Vector4(X / vector.X, Y / vector.Y, Z / vector.Z, W / vector.W);
 		}
@@ -90,7 +90,7 @@ namespace CFH
 		{
 			return Vector4(X / value, Y / value, Z / value, W / value);
 		}
-		Vector4 Vector4::operator+=(Vector4 vector)
+		const Vector4& Vector4::operator+=(const Vector4& vector)
 		{
 			X += vector.X;
 			Y += vector.Y;
@@ -98,7 +98,7 @@ namespace CFH
 			W += vector.W;
 			return *this;
 		}
-		Vector4 Vector4::operator-=(Vector4 vector)
+		const Vector4& Vector4::operator-=(const Vector4& vector)
 		{
 			X -= vector.X;
 			Y -= vector.Y;
@@ -106,7 +106,7 @@ namespace CFH
 			W -= vector.W;
 			return *this;
 		}
-		Vector4 Vector4::operator*=(Vector4 vector)
+		const Vector4& Vector4::operator*=(const Vector4& vector)
 		{
 			X *= vector.X;
 			Y *= vector.Y;
@@ -114,7 +114,7 @@ namespace CFH
 			W *= vector.W;
 			return *this;
 		}
-		Vector4 Vector4::operator*=(float value)
+		const Vector4& Vector4::operator*=(float value)
 		{
 			X *= value;
 			Y *= value;
@@ -122,7 +122,7 @@ namespace CFH
 			W *= value;
 			return *this;
 		}
-		Vector4 Vector4::operator/=(Vector4 vector)
+		const Vector4& Vector4::operator/=(const Vector4& vector)
 		{
 			X /= vector.X;
 			Y /= vector.Y;
@@ -130,7 +130,7 @@ namespace CFH
 			W /= vector.W;
 			return *this;
 		}
-		Vector4 Vector4::operator/=(float value)
+		const Vector4& Vector4::operator/=(float value)
 		{
 			X /= value;
 			Y /= value;
@@ -138,15 +138,15 @@ namespace CFH
 			W /= value;
 			return *this;
 		}
-		bool Vector4::operator==(Vector4 vector) const
+		bool Vector4::operator==(const Vector4& vector) const
 		{
 			return (X == vector.X && Y == vector.Y && Z == vector.Z && W == vector.W);
 		}
-		bool Vector4::operator!=(Vector4 vector) const
+		bool Vector4::operator!=(const Vector4& vector) const
 		{
 			return (X != vector.X || Y != vector.Y || Z != vector.Z || W != vector.W);
 		}
-		Vector4 Vector4::operator=(Vector4 vector)
+		const Vector4& Vector4::operator=(const Vector4& vector)
 		{
 			X = vector.X;
 			Y = vector.Y;
@@ -155,91 +155,91 @@ namespace CFH
 			return *this;
 		}
 
-		Vector4 Vector4::Add(Vector4 lhs, Vector4 rhs)
+		Vector4 Vector4::Add(const Vector4& lhs, const Vector4& rhs)
 		{
 			Vector4 result;
 			Add(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::Add(Vector4 lhs, Vector4 rhs, Vector4& result)
+		void Vector4::Add(const Vector4& lhs, const Vector4& rhs, Vector4& result)
 		{
 			result.X = lhs.X + rhs.X;
 			result.Y = lhs.Y + rhs.Y;
 			result.Z = lhs.Z + rhs.Z;
 			result.W = lhs.W + rhs.W;
 		}
-		Vector4 Vector4::Subtract(Vector4 lhs, Vector4 rhs)
+		Vector4 Vector4::Subtract(const Vector4& lhs, const Vector4& rhs)
 		{
 			Vector4 result;
 			Subtract(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::Subtract(Vector4 lhs, Vector4 rhs, Vector4& result)
+		void Vector4::Subtract(const Vector4& lhs, const Vector4& rhs, Vector4& result)
 		{
 			result.X = lhs.X - rhs.X;
 			result.Y = lhs.Y - rhs.Y;
 			result.Z = lhs.Z - rhs.Z;
 			result.W = lhs.W - rhs.W;
 		}
-		Vector4 Vector4::Multiply(Vector4 lhs, Vector4 rhs)
+		Vector4 Vector4::Multiply(const Vector4& lhs, const Vector4& rhs)
 		{
 			Vector4 result;
 			Multiply(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::Multiply(Vector4 lhs, Vector4 rhs, Vector4& result)
+		void Vector4::Multiply(const Vector4& lhs, const Vector4& rhs, Vector4& result)
 		{
 			result.X = lhs.X * rhs.X;
 			result.Y = lhs.Y * rhs.Y;
 			result.Z = lhs.Z * rhs.Z;
 			result.W = lhs.W * rhs.W;
 		}
-		Vector4 Vector4::Multiply(Vector4 vector, float value)
+		Vector4 Vector4::Multiply(const Vector4& vector, float value)
 		{
 			Vector4 result;
 			Multiply(vector, value, result);
 			return result;
 		}
-		void Vector4::Multiply(Vector4 vector, float value, Vector4& result)
+		void Vector4::Multiply(const Vector4& vector, float value, Vector4& result)
 		{
 			result.X = vector.X * value;
 			result.Y = vector.Y * value;
 			result.Z = vector.Z * value;
 			result.W = vector.W * value;
 		}
-		Vector4 Vector4::Divide(Vector4 lhs, Vector4 rhs)
+		Vector4 Vector4::Divide(const Vector4& lhs, const Vector4& rhs)
 		{
 			Vector4 result;
 			Divide(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::Divide(Vector4 lhs, Vector4 rhs, Vector4& result)
+		void Vector4::Divide(const Vector4& lhs, const Vector4& rhs, Vector4& result)
 		{
 			result.X = lhs.X / rhs.X;
 			result.Y = lhs.Y / rhs.Y;
 			result.Z = lhs.Z / rhs.Z;
 			result.W = lhs.W / rhs.W;
 		}
-		Vector4 Vector4::Divide(Vector4 vector, float value)
+		Vector4 Vector4::Divide(const Vector4& vector, float value)
 		{
 			Vector4 result;
 			Divide(vector, value, result);
 			return result;
 		}
-		void Vector4::Divide(Vector4 vector, float value, Vector4& result)
+		void Vector4::Divide(const Vector4& vector, float value, Vector4& result)
 		{
 			result.X = vector.X / value;
 			result.Y = vector.Y / value;
 			result.Z = vector.Z / value;
 			result.W = vector.W / value;
 		}
-		Vector4 Vector4::Negate(Vector4 vector)
+		Vector4 Vector4::Negate(const Vector4& vector)
 		{
 			Vector4 result;
 			Negate(vector, result);
 			return result;
 		}
-		void Vector4::Negate(Vector4 vector, Vector4& result)
+		void Vector4::Negate(const Vector4& vector, Vector4& result)
 		{
 			result.X = -vector.X;
 			result.Y = -vector.Y;
@@ -257,13 +257,13 @@ namespace CFH
 		{
 			Length(*this, result);
 		}
-		float Vector4::Length(Vector4 vector)
+		float Vector4::Length(const Vector4& vector)
 		{
 			float result;
 			Length(vector, result);
 			return result;
 		}
-		void Vector4::Length(Vector4 vector, float& result)
+		void Vector4::Length(const Vector4& vector, float& result)
 		{
 			LengthSquared(vector, result);
 			result = MathHelper::Sqrt(result);
@@ -279,36 +279,36 @@ namespace CFH
 		{
 			LengthSquared(*this, result);
 		}
-		float Vector4::LengthSquared(Vector4 vector)
+		float Vector4::LengthSquared(const Vector4& vector)
 		{
 			float result;
 			LengthSquared(vector, result);
 			return result;
 		}
-		void Vector4::LengthSquared(Vector4 vector, float& result)
+		void Vector4::LengthSquared(const Vector4& vector, float& result)
 		{
 			result = (vector.X * vector.X) + (vector.Y * vector.Y) +
 				(vector.Z * vector.Z) + (vector.W * vector.W);
 		}
 
-		float Vector4::Distance(Vector4 lhs, Vector4 rhs)
+		float Vector4::Distance(const Vector4& lhs, const Vector4& rhs)
 		{
 			float result;
 			Distance(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::Distance(Vector4 lhs, Vector4 rhs, float& result)
+		void Vector4::Distance(const Vector4& lhs, const Vector4& rhs, float& result)
 		{
 			DistanceSquared(lhs, rhs, result);
 			result = MathHelper::Sqrt(result);
 		}
-		float Vector4::DistanceSquared(Vector4 lhs, Vector4 rhs)
+		float Vector4::DistanceSquared(const Vector4& lhs, const Vector4& rhs)
 		{
 			float result;
 			DistanceSquared(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::DistanceSquared(Vector4 lhs, Vector4 rhs, float& result)
+		void Vector4::DistanceSquared(const Vector4& lhs, const Vector4& rhs, float& result)
 		{
 			float deltaX, deltaY, deltaZ, deltaW;
 			deltaX = rhs.X - lhs.X;
@@ -319,25 +319,25 @@ namespace CFH
 				(deltaZ * deltaZ) + (deltaW * deltaW);
 		}
 
-		float Vector4::Dot(Vector4 lhs, Vector4 rhs)
+		float Vector4::Dot(const Vector4& lhs, const Vector4& rhs)
 		{
 			float result;
 			Dot(lhs, rhs, result);
 			return result;
 		}
-		void Vector4::Dot(Vector4 lhs, Vector4 rhs, float& result)
+		void Vector4::Dot(const Vector4& lhs, const Vector4& rhs, float& result)
 		{
 			result = (lhs.X * rhs.X) + (lhs.Y * rhs.Y) +
 				(lhs.Z * rhs.Z) + (lhs.W * rhs.W);
 		}
 
-		Vector4 Vector4::Clamp(Vector4 vector, Vector4 min, Vector4 max)
+		Vector4 Vector4::Clamp(const Vector4& vector, const Vector4& min, const Vector4& max)
 		{
 			Vector4 result;
 			Clamp(vector, min, max, result);
 			return result;
 		}
-		void Vector4::Clamp(Vector4 vector, Vector4 min, Vector4 max, Vector4& result)
+		void Vector4::Clamp(const Vector4& vector, const Vector4& min, const Vector4& max, Vector4& result)
 		{
 			MathHelper::Clamp(vector.X, min.X, max.X, result.X);
 			MathHelper::Clamp(vector.Y, min.Y, max.Y, result.Y);
@@ -352,13 +352,13 @@ namespace CFH
 			Z /= length;
 			W /= length;
 		}
-		Vector4 Vector4::Normalize(Vector4 vector)
+		Vector4 Vector4::Normalize(const Vector4& vector)
 		{
 			Vector4 result;
 			Normalize(vector, result);
 			return result;
 		}
-		void Vector4::Normalize(Vector4 vector, Vector4& result)
+		void Vector4::Normalize(const Vector4& vector, Vector4& result)
 		{
 			float length = Length(vector);
 			result.X = vector.X / length;
@@ -367,13 +367,13 @@ namespace CFH
 			result.W = vector.W / length;
 		}
 
-		Vector4 Vector4::Transform(Vector4 vector, Matrix4 matrix)
+		Vector4 Vector4::Transform(const Vector4& vector, const Matrix4& matrix)
 		{
 			Vector4 result;
 			Transform(vector, matrix, result);
 			return result;
 		}
-		void Vector4::Transform(Vector4 vector, Matrix4 matrix, Vector4& result)
+		void Vector4::Transform(const Vector4& vector, const Matrix4& matrix, Vector4& result)
 		{
 			Vector4 v;
 			Vector4::Dot(vector, Vector4(matrix.M11, matrix.M21, matrix.M31, matrix.M41), v.X);
