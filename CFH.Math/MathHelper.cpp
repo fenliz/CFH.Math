@@ -13,9 +13,7 @@ namespace CFH
 
 		float MathHelper::Sqrt(float value)
 		{
-			float result;
-			Sqrt(value, result);
-			return result;
+			return sqrtf(value);
 		}
 		void MathHelper::Sqrt(float value, float& result)
 		{
@@ -24,9 +22,7 @@ namespace CFH
 
 		float MathHelper::Sin(float value)
 		{
-			float result;
-			Sin(value, result);
-			return result;
+			return sinf(value);
 		}
 		void MathHelper::Sin(float value, float& result)
 		{
@@ -34,9 +30,7 @@ namespace CFH
 		}
 		float MathHelper::Cos(float value)
 		{
-			float result;
-			Cos(value, result);
-			return result;
+			return cosf(value);
 		}
 		void MathHelper::Cos(float value, float& result)
 		{
@@ -44,9 +38,7 @@ namespace CFH
 		}
 		float MathHelper::Tan(float value)
 		{
-			float result;
-			Tan(value, result);
-			return result;
+			return tanf(value);
 		}
 		void MathHelper::Tan(float value, float& result)
 		{
@@ -55,9 +47,7 @@ namespace CFH
 
 		float MathHelper::ASin(float value)
 		{
-			float result;
-			ASin(value, result);
-			return result;
+			return asinf(value);
 		}
 		void MathHelper::ASin(float value, float& result)
 		{
@@ -65,9 +55,7 @@ namespace CFH
 		}
 		float MathHelper::ACos(float value)
 		{
-			float result;
-			ACos(value, result);
-			return result;
+			return acosf(value);
 		}
 		void MathHelper::ACos(float value, float& result)
 		{
@@ -75,9 +63,7 @@ namespace CFH
 		}
 		float MathHelper::ATan(float value)
 		{
-			float result;
-			ATan(value, result);
-			return result;
+			return atanf(value);
 		}
 		void MathHelper::ATan(float value, float& result)
 		{
@@ -85,41 +71,72 @@ namespace CFH
 		}
 		float MathHelper::ATan2(float v1, float v2)
 		{
-			float result;
-			ATan2(v1, v2, result);
-			return result;
+			return atan2f(v1, v2);
 		}
 		void MathHelper::ATan2(float v1, float v2, float& result)
 		{
 			result = atan2f(v1, v2);
 		}
 
+		int MathHelper::Max(int a, int b)
+		{
+			return (a > b ? b : a);
+		}
+		void MathHelper::Max(int a, int b, int& result)
+		{
+			result = (a > b ? b : a);
+		}
 		float MathHelper::Max(float a, float b)
 		{
-			float result;
-			Max(a, b, result);
-			return result;
+			return (a > b ? b : a);
 		}
 		void MathHelper::Max(float a, float b, float& result)
 		{
 			result = (a > b ? b : a);
 		}
+		int MathHelper::Min(int a, int b)
+		{
+			return (a < b ? b : a);
+		}
+		void MathHelper::Min(int a, int b, int& result)
+		{
+			result = (a < b ? b : a);
+		}
 		float MathHelper::Min(float a, float b)
 		{
-			float result;
-			Min(a, b, result);
-			return result;
+			return (a < b ? b : a);
 		}
 		void MathHelper::Min(float a, float b, float& result)
 		{
 			result = (a < b ? b : a);
 		}
 
+		int MathHelper::Clamp(int value, int min, int max)
+		{
+			if (value < min)
+				return min;
+			else if (value > max)
+				return max;
+			else
+				return value;
+		}
+		void MathHelper::Clamp(int value, int min, int max, int& result)
+		{
+			if (value < min)
+				result = min;
+			else if (value > max)
+				result = max;
+			else
+				result = value;
+		}
 		float MathHelper::Clamp(float value, float min, float max)
 		{
-			float result;
-			Clamp(value, min, max, result);
-			return result;
+			if (value < min)
+				return min;
+			else if (value > max)
+				return max;
+			else
+				return value;
 		}
 		void MathHelper::Clamp(float value, float min, float max, float& result)
 		{
@@ -131,11 +148,17 @@ namespace CFH
 				result = value;
 		}
 
+		int MathHelper::Abs(int value)
+		{
+			return abs(value);
+		}
+		void MathHelper::Abs(int value, int& result)
+		{
+			result = abs(value);
+		}
 		float MathHelper::Abs(float value)
 		{
-			float result;
-			Abs(value, result);
-			return result;
+			return fabs(value);
 		}
 		void MathHelper::Abs(float value, float& result)
 		{
@@ -144,9 +167,7 @@ namespace CFH
 
 		float MathHelper::DegreesToRadians(float value)
 		{
-			float result;
-			DegreesToRadians(value, result);
-			return result;
+			return value * (PI / 180);
 		}
 		void MathHelper::DegreesToRadians(float value, float& result)
 		{
@@ -155,9 +176,7 @@ namespace CFH
 
 		float MathHelper::RadiansToDegrees(float value)
 		{
-			float result;
-			RadiansToDegrees(value, result);
-			return result;
+			return value * (180 / PI);
 		}
 		void MathHelper::RadiansToDegrees(float value, float& result)
 		{

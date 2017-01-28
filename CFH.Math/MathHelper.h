@@ -31,14 +31,22 @@ namespace CFH
 			static void ATan2(float v1, float v2, float& result);
 			static float ATan2(float v1, float v2);
 
+			static int Max(int a, int b);
+			static void Max(int a, int b, int& result);
 			static float Max(float a, float b);
 			static void Max(float a, float b, float& result);
+			static int Min(int a, int b);
+			static void Min(int a, int b, int& result);
 			static float Min(float a, float b);
 			static void Min(float a, float b, float& result);
 
+			static int Clamp(int value, int min, int max);
+			static void Clamp(int value, int min, int max, int& result);
 			static float Clamp(float value, float min, float max);
 			static void Clamp(float value, float min, float max, float& result);
 
+			static int Abs(int value);
+			static void Abs(int value, int& result);
 			static float Abs(float value);
 			static void Abs(float value, float& result);
 
